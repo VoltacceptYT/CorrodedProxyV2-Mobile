@@ -7,7 +7,6 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.view.InputDevice
-import android.view.InputDevice.MOTION_RANGE
 import android.view.MotionEvent
 import androidx.core.content.ContextCompat
 

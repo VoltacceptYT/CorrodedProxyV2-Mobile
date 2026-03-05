@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerDevices.adapter = adapter
         
-        spinnerDevices.setOnItemSelectedListener { _, _, position, _ ->
+        spinnerDevices.setOnItemSelectedListener { parent: android.widget.AdapterView<*>?, view: android.view.View?, position: Int, id: Long ->
             selectedDeviceId = deviceIds[position]
             useController = position > 0
             if (isVibrating) {

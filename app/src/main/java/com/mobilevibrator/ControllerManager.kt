@@ -108,60 +108,56 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
     private fun vibrateDevice(vibrator: Vibrator, intensity: Float) {
         if (!vibrator.hasVibrator()) return
 
-        val maxAmplitude = 255  // most modern devices accept up to 255
-        val baseAmplitude = (intensity * maxAmplitude * 0.92f).toInt().coerceIn(40, maxAmplitude)
+        val maxAmplitude = 255
+        val baseAmplitude = (intensity * maxAmplitude).coerceIn(1, maxAmplitude)  // avoid 0
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // ──────────────────────────────────────────────────────────────
-            //   Escalating pleasure pattern — repeats every ~35 seconds
-            // ──────────────────────────────────────────────────────────────
+            // timings:    delay, ON, OFF, ON, OFF, ...
+            // amplitudes:  0  , amp,  0 , amp,  0 , ...
             val timings = longArrayOf(
-                0,    // start
-                180,  80,   // gentle warm-up
-                220,  60,
-                280,  50,
-                340,  40,   // getting faster & stronger
-                400,  35,
-                480,  30,   // strong & fast
-                580,  25,
-                680,  20,   // peak zone — very fast & hard
-                800,  180,  // long strong hold (climax simulation)
-                1200, 400,  // drop / refractory
-                600,  300,
-                400,  200,
-                300,  150   // returning to baseline tease
+                0L,   // initial delay
+                180, 80,
+                220, 60,
+                280, 50,
+                340, 40,
+                400, 35,
+                480, 30,
+                580, 25,
+                680, 20,
+                800, 180,   // long strong climax hold
+                1200, 400,  // drop
+                600, 300,
+                400, 200,
+                300, 150,
+                250, 100    // gentle tail → loops back smoothly
             )
 
             val amplitudes = intArrayOf(
                 0,
-                (baseAmplitude * 0.35).toInt(),
-                0,
-                (baseAmplitude * 0.50).toInt(),
-                0,
-                (baseAmplitude * 0.68).toInt(),
-                0,
-                (baseAmplitude * 0.85).toInt(),
-                0,
-                baseAmplitude,
-                0,
-                (baseAmplitude * 0.95).toInt(),
-                0,
-                (baseAmplitude * 0.75).toInt(),
-                0,
-                (baseAmplitude * 0.45).toInt(),
-                0
+                (baseAmplitude * 0.35).toInt(), 0,
+                (baseAmplitude * 0.50).toInt(), 0,
+                (baseAmplitude * 0.68).toInt(), 0,
+                (baseAmplitude * 0.85).toInt(), 0,
+                baseAmplitude, 0,
+                (baseAmplitude * 0.95).toInt(), 0,
+                (baseAmplitude * 0.75).toInt(), 0,
+                (baseAmplitude * 0.45).toInt(), 0,
+                (baseAmplitude * 0.25).toInt(), 0
             )
 
+            // Both arrays now have 21 elements → safe
             val effect = VibrationEffect.createWaveform(timings, amplitudes, -1)
             vibrator.vibrate(effect)
         } else {
             @Suppress("DEPRECATION")
+            // Old style: only timings (on/off pairs), amplitude is full strength
             vibrator.vibrate(
-                longArrayOf(0, 180,80,220,60,280,50,340,40,400,35,480,30,580,25,680,20,800,180,1200,400,600,300,400,200,300,150),
-                -1
+                longArrayOf(0, 180,80,220,60,280,50,340,40,400,35,480,30,580,25,680,20,800,180,1200,400,600,300,400,200,300,150,250,100),
+                -1  // repeat from index 0
             )
         }
     }
+
     private fun isGameController(device: InputDevice): Boolean {
         // Check if device is a game controller
         return (device.sources and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD ||

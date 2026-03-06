@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             vibrator = vibratorManager.defaultVibrator
         } else {
             @Suppress("DEPRECATION")
-            getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         }
         
         // Set up intensity slider

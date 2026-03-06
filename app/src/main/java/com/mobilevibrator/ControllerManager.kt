@@ -108,8 +108,8 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
         if (!vibrator.hasVibrator()) return
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create continuous vibration at selected intensity (10x stronger)
-            val amplitude = (intensity * 255 * 10).toInt()
+            // Create continuous vibration at selected intensity (100x stronger)
+            val amplitude = (intensity * 255 * 100).toInt()
             val vibrationEffect = VibrationEffect.createOneShot(10000, amplitude) // 10 seconds
             vibrator.vibrate(vibrationEffect)
         } else {

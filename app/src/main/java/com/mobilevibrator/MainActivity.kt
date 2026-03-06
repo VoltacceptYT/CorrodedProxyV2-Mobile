@@ -224,8 +224,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun startPhoneVibration() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create continuous vibration at selected intensity (10x stronger)
-            val amplitude = (vibrationIntensity * 255 * 10).toInt()
+            // Create continuous vibration at selected intensity (100x stronger)
+            val amplitude = (vibrationIntensity * 255 * 100).toInt()
             val vibrationEffect = VibrationEffect.createOneShot(10000, amplitude) // 10 seconds
             vibrator.vibrate(vibrationEffect)
         } else {

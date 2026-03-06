@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary colors -->
+    <!-- Primary colors - Modern purple gradient -->
     <color name="purple_200">#E1BEE7</color>
-    <color name="purple_500">#A020F0</color>
-    <color name="purple_700">#6A0DAD</color>
-    <color name="purple_900">#4A0080</color>
+    <color name="purple_500">#8B5CF6</color>
+    <color name="purple_700">#6366F1</color>
+    <color name="purple_900">#4C1D95</color>
     
-    <!-- Secondary colors -->
+    <!-- Secondary colors - Bright accent -->
     <color name="teal_200">#B2DFDB</color>
-    <color name="teal_500">#8A2BE2</color>
-    <color name="teal_700">#4B0082</color>
-    <color name="teal_900">#4B0082</color>
+    <color name="teal_500">#00E676</color>
+    <color name="teal_700">#00C853</color>
+    <color name="teal_900">#009560</color>
     
     <!-- Theme colors -->
     <color name="primary">@color/purple_500</color>
@@ -19,15 +19,17 @@
     <color name="secondary_variant">@color/teal_700</color>
     
     <!-- Status colors -->
-    <color name="vibration_on">#4CAF50</color>
-    <color name="vibration_off">#FF6B6B</color>
+    <color name="vibration_on">#00E676</color>
+    <color name="vibration_off">#FF5252</color>
     
-    <!-- Background colors -->
-    <color name="background">#1A1A1A</color>
-    <color name="surface">#2A2A2A</color>
+    <!-- Background colors - Dark glass effect -->
+    <color name="background">#0F0F0F</color>
+    <color name="surface">#1A1A1A</color>
+    <color name="surface_variant">#252525</color>
     
     <!-- Text colors -->
     <color name="on_primary">@android:color/white</color>
     <color name="on_secondary">@android:color/white</color>
-    <color name="on_surface">@android:color/white</color>
+    <color name="on_surface">#F0F0F0</color>
+    <color name="text_secondary">#B0B0B0</color>
 </resources>

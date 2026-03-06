@@ -7,16 +7,18 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
+    <!-- Title Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/titleCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp"
         app:cardBackgroundColor="@color/surface"
         app:strokeColor="@color/primary"
-        app:strokeWidth="1dp"
+        app:strokeWidth="0.5dp"
+        app:rippleColor="@color/primary_variant"
         app:layout_constraintBottom_toTopOf="@+id/deviceCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,42 +29,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="28dp"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Device Vibration Tester"
-                android:textColor="@color/on_primary"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal" />
+                style="@style/TextAppearance.TitleText" />
 
             <TextView
                 android:id="@+id/tvSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:text="Control Vibration"
-                android:textColor="@color/on_secondary"
-                android:textSize="16sp"
-                android:layout_gravity="center_horizontal" />
+                style="@style/TextAppearance.SubtitleText" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Device Selection Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/deviceCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp"
         app:cardBackgroundColor="@color/surface"
         app:strokeColor="@color/primary"
-        app:strokeWidth="1dp"
+        app:strokeWidth="0.5dp"
+        app:rippleColor="@color/primary_variant"
         app:layout_constraintBottom_toTopOf="@+id/statusCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,34 +79,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Select Device:"
-                android:textColor="@color/on_primary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal" />
+                style="@style/TextAppearance.DeviceLabel" />
 
             <Spinner
                 android:id="@+id/spinnerDevices"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/spinner_background"
-                android:popupBackground="@drawable/spinner_dropdown_background"
-                android:textColor="@color/on_primary" />
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/glass_spinner_background"
+                android:popupBackground="@drawable/glass_card_background"
+                style="@style/Widget.Spinner" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Status Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/statusCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp"
         app:cardBackgroundColor="@color/surface"
         app:strokeColor="@color/primary"
-        app:strokeWidth="1dp"
+        app:strokeWidth="0.5dp"
+        app:rippleColor="@color/primary_variant"
         app:layout_constraintBottom_toTopOf="@+id/controlCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,32 +115,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phone: Vibration OFF"
-                android:textColor="@color/vibration_off"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal" />
+                style="@style/TextAppearance.StatusText" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Control Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/controlCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp"
         app:cardBackgroundColor="@color/surface"
         app:strokeColor="@color/primary"
-        app:strokeWidth="1dp"
+        app:strokeWidth="0.5dp"
+        app:rippleColor="@color/primary_variant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,17 +150,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
+            android:padding="32dp"
             android:gravity="center">
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/toggleVibration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleX="2.0"
-                android:scaleY="2.0"
-                app:trackTint="@color/surface"
-                app:thumbTint="@color/secondary" />
+                android:scaleX="1.8"
+                android:scaleY="1.8"
+                style="@style/CustomSwitch" />
 
         </LinearLayout>
 

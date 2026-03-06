@@ -115,16 +115,7 @@ class MainActivity : AppCompatActivity() {
         controllerManager.setDeviceListener { devices ->
             updateDeviceList(devices)
         }
-        controllerManager.setVibrationCompleteListener {
-            // Auto-turn off toggle after controller vibration completes
-            if (isVibrating && useController) {
-                runOnUiThread {
-                    toggleVibration.isChecked = false
-                    isVibrating = false
-                    updateStatus(false)
-                }
-            }
-        }
+        // No vibration completion callback needed since vibration stays on
     }
 
     private fun updateDeviceList(devices: List<ControllerDevice>) {
@@ -220,33 +211,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun startPhoneVibration() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create vibration pattern with adjustable intensity
-            val timings = longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500)
-            val amplitudes = intArrayOf(0, 51, 0, 102, 0, 153, 0, 204, 0, 255)
-            
-            // Apply intensity scaling
-            val scaledAmplitudes = amplitudes.map { (it * vibrationIntensity).toInt() }.toIntArray()
-            
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                val vibrationEffect = VibrationEffect.createWaveform(timings, scaledAmplitudes, -1)
-                vibrator.vibrate(vibrationEffect)
-            } else {
-                val vibrationEffect = VibrationEffect.createWaveform(timings, -1)
-                vibrator.vibrate(vibrationEffect)
-            }
+            // Create continuous vibration at selected intensity
+            val amplitude = (vibrationIntensity * 255).toInt()
+            val vibrationEffect = VibrationEffect.createOneShot(60000, amplitude) // 60 seconds continuous
+            vibrator.vibrate(vibrationEffect)
         } else {
             @Suppress("DEPRECATION")
-            vibrator.vibrate(longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500), -1)
+            vibrator.vibrate(60000) // 60 seconds continuous for older versions
         }
         
-        // Auto-turn off toggle after vibration completes (2.9 seconds)
-        handler.postDelayed({
-            if (isVibrating && !useController) {
-                toggleVibration.isChecked = false
-                isVibrating = false
-                updateStatus(false)
-            }
-        }, 2900) // 2.9 seconds total duration
+        // No auto-turn off - vibration stays on until manually toggled off
     }
 
     private fun stopVibration() {

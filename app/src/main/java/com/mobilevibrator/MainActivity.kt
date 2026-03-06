@@ -13,6 +13,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var toggleVibration: SwitchMaterial
     private lateinit var tvStatus: TextView
-    private lateinit var spinnerDevices: Spinner
+    private lateinit var spinnerDevices: AutoCompleteTextView
     private lateinit var vibrator: Vibrator
     private lateinit var controllerManager: ControllerManager
     private lateinit var deviceAdapter: DeviceAdapter
@@ -112,21 +113,15 @@ class MainActivity : AppCompatActivity() {
         
         // Update adapter with all devices
         deviceAdapter = DeviceAdapter(this, allDevices)
-        spinnerDevices.adapter = deviceAdapter
+        spinnerDevices.setAdapter(deviceAdapter)
         
-        spinnerDevices.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
-                val selectedDevice = allDevices[position]
-                selectedDeviceId = selectedDevice.id
-                useController = position > 0
-                if (isVibrating) {
-                    stopVibration()
-                    startMaxVibration()
-                }
-            }
-            
-            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
-                // Do nothing
+        spinnerDevices.setOnItemClickListener { parent, view, position, id ->
+            val selectedDevice = allDevices[position]
+            selectedDeviceId = selectedDevice.id
+            useController = position > 0
+            if (isVibrating) {
+                stopVibration()
+                startMaxVibration()
             }
         }
     }
@@ -240,7 +235,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateStatus(vibrating: Boolean) {
         val deviceName = if (useController) {
-            val selectedDevice = deviceAdapter.getItem(spinnerDevices.selectedItemPosition) as? ControllerDevice
+            val position = spinnerDevices.text.toString().let { text ->
+                allDevices.indexOfFirst { it.name == text }
+            }
+            val selectedDevice = if (position >= 0) allDevices[position] else null
             selectedDevice?.name ?: "Controller"
         } else {
             "Phone"

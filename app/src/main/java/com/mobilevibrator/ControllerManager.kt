@@ -84,8 +84,7 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
     }
 
     fun setVibrationCompleteListener(listener: () -> Unit) {
-        // No longer needed since vibration doesn't auto-stop
-        // Keeping method for compatibility but it won't be called
+        vibrationCompleteListener = listener
     }
 
     fun vibrateController(deviceId: Int, intensity: Float = 1.0f) {
@@ -111,14 +110,17 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create continuous vibration at selected intensity
             val amplitude = (intensity * 255).toInt()
-            val vibrationEffect = VibrationEffect.createOneShot(60000, amplitude) // 60 seconds continuous
+            val vibrationEffect = VibrationEffect.createOneShot(10000, amplitude) // 10 seconds
             vibrator.vibrate(vibrationEffect)
         } else {
             @Suppress("DEPRECATION")
-            vibrator.vibrate(60000) // 60 seconds continuous for older versions
+            vibrator.vibrate(10000) // 10 seconds for older versions
         }
         
-        // No auto-turn off - vibration stays on until manually stopped
+        // Schedule restart after 10 seconds to create infinite loop
+        handler.postDelayed({
+            vibrationCompleteListener?.invoke()
+        }, 10000) // Restart after 10 seconds
     }
 
     private fun isGameController(device: InputDevice): Boolean {

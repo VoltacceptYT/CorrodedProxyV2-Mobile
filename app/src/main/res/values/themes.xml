@@ -22,6 +22,6 @@
         <!-- Custom widget styles. -->
         <item name="cardViewStyle">@style/Widget.CardView</item>
         <item name="spinnerStyle">@style/Widget.Spinner</item>
-        <item name="switchStyle">@style/Widget.MaterialComponents.CompoundButton.Switch</item>
+        <item name="switchStyle">@style/CustomSwitch</item>
     </style>
 </resources>

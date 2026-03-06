@@ -19,7 +19,7 @@
     </style>
     
     <!-- Modern switch style -->
-    <style name="Widget.MaterialComponents.CompoundButton.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
+    <style name="CustomSwitch" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="trackTint">@color/surface</item>
         <item name="thumbTint">@color/secondary</item>
     </style>

@@ -13,7 +13,7 @@
     </style>
     
     <!-- Modern spinner style -->
-    <style name="Widget.Spinner" parent="Widget.Material3.AutoCompleteTextView.ExposedDropdownMenu">
+    <style name="Widget.Spinner" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="android:background">@drawable/glass_spinner_background</item>
         <item name="android:popupBackground">@drawable/glass_card_background</item>
         <item name="android:textColor">@color/on_surface</item>

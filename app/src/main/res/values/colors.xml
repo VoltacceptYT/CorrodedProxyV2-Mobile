@@ -1,35 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary colors - Modern purple gradient -->
-    <color name="purple_200">#E1BEE7</color>
-    <color name="purple_500">#8B5CF6</color>
-    <color name="purple_700">#6366F1</color>
-    <color name="purple_900">#4C1D95</color>
+    <!-- Material Design 3 Color Scheme -->
+    <!-- Primary -->
+    <color name="md_theme_light_primary">#6750A4</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#EADDFF</color>
     
-    <!-- Secondary colors - Bright accent -->
-    <color name="teal_200">#B2DFDB</color>
-    <color name="teal_500">#00E676</color>
-    <color name="teal_700">#00C853</color>
-    <color name="teal_900">#009560</color>
+    <!-- Secondary -->
+    <color name="md_theme_light_secondary">#625B71</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#E8DEF8</color>
     
-    <!-- Theme colors -->
-    <color name="primary">@color/purple_500</color>
-    <color name="primary_variant">@color/purple_700</color>
-    <color name="secondary">@color/teal_500</color>
-    <color name="secondary_variant">@color/teal_700</color>
+    <!-- Surface and Background -->
+    <color name="md_theme_light_surface">#FEFFFE</color>
+    <color name="md_theme_light_onSurface">#1C1B1B</color>
+    <color name="md_theme_light_background">#FEFFFE</color>
+    <color name="md_theme_light_onBackground">#FEFFFE</color>
     
-    <!-- Status colors -->
-    <color name="vibration_on">#00E676</color>
-    <color name="vibration_off">#FF5252</color>
+    <!-- Outline and Variant -->
+    <color name="md_theme_light_outline">#B69CC8</color>
+    <color name="md_theme_light_primaryVariant">#5D39B4</color>
+    <color name="md_theme_light_secondaryVariant">#455A64</color>
     
-    <!-- Background colors - Dark glass effect -->
-    <color name="background">#0F0F0F</color>
-    <color name="surface">#1A1A1A</color>
-    <color name="surface_variant">#252525</color>
+    <!-- Status Colors -->
+    <color name="vibration_on">#4CAF50</color>
+    <color name="vibration_off">#CF6679</color>
     
-    <!-- Text colors -->
-    <color name="on_primary">@android:color/white</color>
-    <color name="on_secondary">@android:color/white</color>
-    <color name="on_surface">#F0F0F0</color>
-    <color name="text_secondary">#B0B0B0</color>
+    <!-- Custom App Colors (Legacy Support) -->
+    <color name="primary">@color/md_theme_light_primary</color>
+    <color name="primary_variant">@color/md_theme_light_primaryVariant</color>
+    <color name="primary_container">@color/md_theme_light_primaryContainer</color>
+    <color name="secondary">@color/md_theme_light_secondary</color>
+    <color name="secondary_variant">@color/md_theme_light_secondaryVariant</color>
+    <color name="secondary_container">@color/md_theme_light_secondaryContainer</color>
+    <color name="surface">@color/md_theme_light_surface</color>
+    <color name="surface_variant">#F5F5F5</color>
+    <color name="background">@color/md_theme_light_background</color>
+    <color name="on_primary">@color/md_theme_light_onPrimary</color>
+    <color name="on_secondary">@color/md_theme_light_onSecondary</color>
+    <color name="on_surface">@color/md_theme_light_onSurface</color>
+    <color name="outline">@color/md_theme_light_outline</color>
 </resources>

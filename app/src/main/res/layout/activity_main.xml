@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/md_theme_light_background"
     tools:context=".MainActivity">
 
     <!-- Title Card -->
@@ -12,13 +12,14 @@
         android:id="@+id/titleCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="12dp"
-        app:cardBackgroundColor="@color/surface"
-        app:strokeColor="@color/primary"
-        app:strokeWidth="0.5dp"
-        app:rippleColor="@color/primary_variant"
+        android:layout_margin="@dimen/default_margin"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardBackgroundColor="@color/md_theme_light_surface"
+        app:strokeColor="@color/outline"
+        app:strokeWidth="@dimen/stroke_width"
+        app:rippleColor="@color/md_theme_light_primaryContainer"
+        app:shapeAppearance="@style/ShapeAppearance.MediumComponent"
         app:layout_constraintBottom_toTopOf="@+id/deviceCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="28dp"
+            android:padding="@dimen/default_padding"
             android:gravity="center">
 
             <TextView
@@ -43,7 +44,7 @@
                 android:id="@+id/tvSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:text="Control Vibration"
                 style="@style/TextAppearance.SubtitleText" />
 
@@ -56,13 +57,14 @@
         android:id="@+id/deviceCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="12dp"
-        app:cardBackgroundColor="@color/surface"
-        app:strokeColor="@color/primary"
-        app:strokeWidth="0.5dp"
-        app:rippleColor="@color/primary_variant"
+        android:layout_margin="@dimen/default_margin"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardBackgroundColor="@color/md_theme_light_surface"
+        app:strokeColor="@color/outline"
+        app:strokeWidth="@dimen/stroke_width"
+        app:rippleColor="@color/md_theme_light_primaryContainer"
+        app:shapeAppearance="@style/ShapeAppearance.MediumComponent"
         app:layout_constraintBottom_toTopOf="@+id/statusCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="@dimen/default_padding">
 
             <TextView
                 android:id="@+id/tvDeviceLabel"
@@ -81,14 +83,22 @@
                 android:text="Select Device:"
                 style="@style/TextAppearance.DeviceLabel" />
 
-            <Spinner
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Spinner"
                 android:id="@+id/spinnerDevices"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/glass_spinner_background"
-                android:popupBackground="@drawable/glass_card_background"
-                style="@style/Widget.Spinner" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:hint="Select device">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerDevices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/md_theme_light_onSurface"
+                    style="@style/TextAppearance.DeviceLabel" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -99,13 +109,14 @@
         android:id="@+id/statusCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="12dp"
-        app:cardBackgroundColor="@color/surface"
-        app:strokeColor="@color/primary"
-        app:strokeWidth="0.5dp"
-        app:rippleColor="@color/primary_variant"
+        android:layout_margin="@dimen/default_margin"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardBackgroundColor="@color/md_theme_light_surface"
+        app:strokeColor="@color/outline"
+        app:strokeWidth="@dimen/stroke_width"
+        app:rippleColor="@color/md_theme_light_primaryContainer"
+        app:shapeAppearance="@style/ShapeAppearance.MediumComponent"
         app:layout_constraintBottom_toTopOf="@+id/controlCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
+            android:padding="@dimen/default_padding"
             android:gravity="center">
 
             <TextView
@@ -134,13 +145,14 @@
         android:id="@+id/controlCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="12dp"
-        app:cardBackgroundColor="@color/surface"
-        app:strokeColor="@color/primary"
-        app:strokeWidth="0.5dp"
-        app:rippleColor="@color/primary_variant"
+        android:layout_margin="@dimen/default_margin"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardBackgroundColor="@color/md_theme_light_surface"
+        app:strokeColor="@color/outline"
+        app:strokeWidth="@dimen/stroke_width"
+        app:rippleColor="@color/md_theme_light_primaryContainer"
+        app:shapeAppearance="@style/ShapeAppearance.MediumComponent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -150,15 +162,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="32dp"
+            android:padding="@dimen/large_padding"
             android:gravity="center">
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/toggleVibration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleX="1.8"
-                android:scaleY="1.8"
                 style="@style/CustomSwitch" />
 
         </LinearLayout>

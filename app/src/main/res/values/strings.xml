@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Device Vibration Tester</string>
+    
+    <!-- Font families for Material Design 3 -->
+    <string name="font_family_regular">sans-serif</string>
+    <string name="font_family_medium">sans-serif-medium</string>
 </resources>

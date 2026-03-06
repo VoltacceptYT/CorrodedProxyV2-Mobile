@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material Design 3 Spacing and Sizing -->
+    
+    <!-- Card dimensions -->
+    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="card_elevation">6dp</dimen>
+    <dimen name="stroke_width">1dp</dimen>
+    
+    <!-- Switch dimensions -->
+    <dimen name="switch_corner_radius">8dp</dimen>
+    <dimen name="switch_elevation">2dp</dimen>
+    
+    <!-- Spinner dimensions -->
+    <dimen name="spinner_corner_radius">12dp</dimen>
+    
+    <!-- Text sizes -->
+    <dimen name="title_text_size">24sp</dimen>
+    <dimen name="subtitle_text_size">14sp</dimen>
+    <dimen name="status_text_size">16sp</dimen>
+    <dimen name="device_label_text_size">14sp</dimen>
+    
+    <!-- Layout spacing -->
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="default_padding">20dp</dimen>
+    <dimen name="large_padding">24dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+</resources>

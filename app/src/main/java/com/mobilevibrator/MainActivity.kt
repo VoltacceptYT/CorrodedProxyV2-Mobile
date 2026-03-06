@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private var selectedDeviceId: Int = -1
     private var useController = false
     private val handler = Handler(Looper.getMainLooper())
+    private var allDevices: List<ControllerDevice> = emptyList()
     
     companion object {
         private const val BLUETOOTH_PERMISSION_REQUEST_CODE = 100
@@ -110,6 +111,9 @@ class MainActivity : AppCompatActivity() {
         
         // Add controllers
         allDevices.addAll(devices)
+        
+        // Store as class property
+        this.allDevices = allDevices
         
         // Update adapter with all devices
         deviceAdapter = DeviceAdapter(this, allDevices)

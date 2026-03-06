@@ -9,7 +9,7 @@ A comprehensive Android application for testing device vibration with graduated 
 - **Graduated Vibration**: 0.5s pattern with increasing intensity levels (20% → 40% → 60% → 80% → 100%)
 - **Smart Delays**: 0.1s pauses between vibration levels for controlled testing
 - **Device Type Icons**: Visual indicators for Xbox, PlayStation, Phone, and Other devices
-- **Android 10+ Support**: Compatible with Android API 29 (Android 10) and above
+- **Android 12+ Support**: Compatible with Android API 31 (Android 12) and above
 - **Clean UI**: Modern Material Design interface with dark theme and device selection
 - **Real-time Status**: Visual feedback showing current vibration state for each device
 - **Automatic Cleanup**: Properly stops vibration when app is closed
@@ -17,7 +17,7 @@ A comprehensive Android application for testing device vibration with graduated 
 
 ## Requirements
 
-- Android 10 (API level 29) or higher
+- Android 12 (API level 31) or higher
 - Device with vibration capability
 - Vibration permission (automatically requested)
 - Bluetooth permissions for controller support (automatically requested)
@@ -87,7 +87,7 @@ Download the latest APK from [Releases](https://github.com/yourusername/device-v
 ## Technical Details
 
 - **Language**: Kotlin
-- **Minimum SDK**: 29 (Android 10)
+- **Minimum SDK**: 31 (Android 12)
 - **Target SDK**: 34 (Android 14)
 - **Build Tool**: Gradle 8.0
 - **UI Framework**: Material Design Components

@@ -108,19 +108,60 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
     private fun vibrateDevice(vibrator: Vibrator, intensity: Float) {
         if (!vibrator.hasVibrator()) return
 
+        val maxAmplitude = 255  // most modern devices accept up to 255
+        val baseAmplitude = (intensity * maxAmplitude * 0.92f).toInt().coerceIn(40, maxAmplitude)
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create maximum speed continuous vibration at selected intensity (max 255)
-            val amplitude = (intensity * 255).toInt()
-            val vibrationEffect = VibrationEffect.createWaveform(longArrayOf(0, 10000), intArrayOf(0, amplitude), -1) // Continuous
-            vibrator.vibrate(vibrationEffect)
+            // ──────────────────────────────────────────────────────────────
+            //   Escalating pleasure pattern — repeats every ~35 seconds
+            // ──────────────────────────────────────────────────────────────
+            val timings = longArrayOf(
+                0,    // start
+                180,  80,   // gentle warm-up
+                220,  60,
+                280,  50,
+                340,  40,   // getting faster & stronger
+                400,  35,
+                480,  30,   // strong & fast
+                580,  25,
+                680,  20,   // peak zone — very fast & hard
+                800,  180,  // long strong hold (climax simulation)
+                1200, 400,  // drop / refractory
+                600,  300,
+                400,  200,
+                300,  150   // returning to baseline tease
+            )
+
+            val amplitudes = intArrayOf(
+                0,
+                (baseAmplitude * 0.35).toInt(),
+                0,
+                (baseAmplitude * 0.50).toInt(),
+                0,
+                (baseAmplitude * 0.68).toInt(),
+                0,
+                (baseAmplitude * 0.85).toInt(),
+                0,
+                baseAmplitude,
+                0,
+                (baseAmplitude * 0.95).toInt(),
+                0,
+                (baseAmplitude * 0.75).toInt(),
+                0,
+                (baseAmplitude * 0.45).toInt(),
+                0
+            )
+
+            val effect = VibrationEffect.createWaveform(timings, amplitudes, -1)
+            vibrator.vibrate(effect)
         } else {
             @Suppress("DEPRECATION")
-            vibrator.vibrate(longArrayOf(0, 10000), 0) // Continuous for older versions
+            vibrator.vibrate(
+                longArrayOf(0, 180,80,220,60,280,50,340,40,400,35,480,30,580,25,680,20,800,180,1200,400,600,300,400,200,300,150),
+                -1
+            )
         }
-        
-        // No restart needed - continuous vibration runs indefinitely
     }
-
     private fun isGameController(device: InputDevice): Boolean {
         // Check if device is a game controller
         return (device.sources and InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD ||

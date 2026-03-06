@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">VBRT</string>
-    <string name="vibration_tester">Girl\'s Best Friend</string>
+    <string name="vibration_tester">A Girl\'s Best Friend</string>
     <string name="test_vibration">Start Vibration</string>
     <string name="vibration_intensity">Vibration Intensity</string>
     <string name="vibration_off">Vibration OFF</string>

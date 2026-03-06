@@ -1,4 +1,4 @@
-# VBRT - Vibration Tester
+# VBRT - A Girl's Best Friend
 
 A modern Android application for testing device vibration with adjustable intensity levels. Supports phone vibration and external game controllers (Bluetooth and wired) with automatic device type detection.
 
@@ -7,14 +7,14 @@ A modern Android application for testing device vibration with adjustable intens
 - **Multi-Device Support**: Control vibration on phone and connected game controllers
 - **Controller Detection**: Automatically detects Bluetooth and wired game controllers with type icons
 - **Adjustable Intensity**: 0-100% vibration intensity control with real-time feedback
-- **Graduated Vibration**: 0.5s pattern with increasing intensity levels (20% → 40% → 60% → 80% → 100%)
-- **Smart Delays**: 0.1s pauses between vibration levels for controlled testing
+- **Infinite Vibration**: Continuous vibration that runs until manually stopped
+- **Live Updates**: Real-time intensity changes while vibrating
+- **Smart Delays**: 10-second cycles with seamless restart for continuous operation
 - **Device Type Icons**: Visual indicators for Xbox, PlayStation, Phone, and Other devices
 - **Android 12+ Support**: Compatible with Android API 31 (Android 12) and above
-- **Dark Theme**: Modern dark interface with card-based layout
+- **Hot Pink Theme**: Modern hot pink and bubblegum pink interface with card-based layout
 - **Real-time Status**: Visual feedback showing current vibration state for each device
 - **Automatic Cleanup**: Properly stops vibration when app is closed
-- **Auto-Toggle Reset**: Switch automatically turns off when vibration pattern completes
 - **Bluetooth Support**: Full Bluetooth controller compatibility with proper permissions
 
 ## Requirements
@@ -65,24 +65,22 @@ A modern Android application for testing device vibration with adjustable intens
 
 2. **Adjust Intensity**: Use the slider to set vibration intensity (0-100%)
 
-3. **Test Vibration**: Toggle the switch to run the graduated vibration pattern:
-   - **Level 1**: 20% intensity for 500ms
-   - **Level 2**: 40% intensity for 500ms  
-   - **Level 3**: 60% intensity for 500ms
-   - **Level 4**: 80% intensity for 500ms
-   - **Level 5**: 100% intensity for 500ms
-   - **Smart Delays**: 0.1s pause between each level
-   - **Total Duration**: 2.9 seconds complete test pattern
+3. **Start Vibration**: Toggle the switch to start infinite vibration:
+   - **Continuous**: Vibration runs indefinitely until manually stopped
+   - **Live Updates**: Adjust intensity in real-time while vibrating
+   - **10-Second Cycles**: Seamless restart every 10 seconds for continuous operation
+   - **Infinite Loop**: Vibration automatically restarts to run forever
 
 4. **Status Indicator**: Shows current vibration state:
-   - **Green**: Device is vibrating
+   - **Pink**: Device is vibrating
    - **Gray**: Device is idle
 
 ### Advanced Features
 
 - **Device Icons**: Automatic icon display based on controller type
 - **Intensity Scaling**: All vibration levels scale with the intensity slider
-- **Auto-Reset**: Toggle automatically turns off when pattern completes
+- **Live Control**: Change intensity while vibrating without interruption
+- **Infinite Operation**: No automatic shutdown - runs until manually stopped
 - **Controller Hot-Swap**: Connect/disconnect controllers without restarting app
 
 ## Technical Details
@@ -103,25 +101,26 @@ A modern Android application for testing device vibration with adjustable intens
 
 ### Vibration Implementation
 
-The app uses Android Vibration API with a sophisticated graduated pattern for comprehensive testing:
+The app uses Android Vibration API with infinite vibration capability and real-time intensity control:
 
 - **Android 12+**: Uses `VibratorManager` for enhanced control
 - **Intensity Scaling**: Real-time amplitude adjustment (0-255 scale)
 - **Controller Vibration**: Uses device-specific vibrators via InputManager
-- **Graduated Pattern**: 5-level intensity sequence (20% → 40% → 60% → 80% → 100%)
-- **Precise Timing**: 500ms vibration + 100ms pause between each level
-- **Total Duration**: 2.9 seconds complete test pattern
+- **Infinite Operation**: 10-second cycles with automatic restart for continuous vibration
+- **Live Updates**: Intensity changes apply immediately while vibrating
+- **Precise Timing**: 10-second vibration cycles with seamless restart
 - **Amplitude Control**: Supports intensity control on Android 10+ (255 = 100%)
-- **No Continuous Loop**: Prevents crashes by using finite pattern instead of infinite
+- **Infinite Loop**: Automatic restart ensures continuous operation until manual stop
 
-### Dark Theme Design
+### Hot Pink Theme Design
 
-- **Background**: Deep dark (#111827) for reduced eye strain
-- **Cards**: Dark gray (#374151) with subtle borders and shadows
-- **Primary Color**: Blue (#6366F1) for interactive elements
-- **Accent Color**: Green (#10B981) for success states
-- **Typography**: Hierarchical text sizing for clear information architecture
+- **Background**: Deep purple-tinted (#1A0D15) for reduced eye strain
+- **Cards**: Purple-tinted (#402940) with hot pink borders and shadows
+- **Primary Color**: Hot pink (#FF1493) for interactive elements
+- **Accent Color**: Bubblegum pink (#FF69B4) for success states and switch thumb
+- **Typography**: Hierarchical text sizing with pink-tinted colors
 - **Layout**: Vertical card stack with consistent spacing
+- **Switch Track**: Slightly darker than cards (#352235) for visual contrast
 
 ## Permissions
 
@@ -189,21 +188,16 @@ This project is open source. See the LICENSE file for details.
 
 ### v1.0.0
 - Initial release with VBRT branding
-- Dark theme implementation
-- Intensity slider control
-- Auto-toggle reset feature
+- Hot pink and bubblegum pink theme implementation
+- Intensity slider control with live updates
+- Infinite vibration capability with 10-second cycles
 - Controller support with device type detection
-- Graduated vibration pattern
+- Real-time intensity adjustment while vibrating
 - Android 12+ compatibility
-- Grant all requested Bluetooth permissions
-- Check system Bluetooth settings
-- Restart the app after granting permissions
+- Automatic vibration restart for continuous operation
 
-**Build errors?**
-- Make sure you have Android SDK installed
-- Update Gradle wrapper if needed
-- Check Java version compatibility
+---
 
-## Support
+**VBRT** - A Girl's Best Friend
 
 For issues and feature requests, please open an issue on the [GitHub repository](https://github.com/yourusername/mobile-vibrator/issues).

@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             vibrator = vibratorManager.defaultVibrator
         } else {
             @Suppress("DEPRECATION")
-            vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         }
         
         // Set up intensity slider
@@ -217,36 +217,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun startPhoneVibration() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val maxAmplitude = 255
-            val amplitude = (vibrationIntensity * maxAmplitude * 0.92f).toInt().coerceIn(40, maxAmplitude)
-
-            // Same pattern as controller — unified feel
-            val timings = longArrayOf(
-                0,180,80,220,60,280,50,340,40,400,35,480,30,580,25,680,20,
-                800,180,1200,400,600,300,400,200,300,150
-            )
-            val amplitudes = intArrayOf(
-                0,
-                (amplitude * 0.35).toInt(), 0,
-                (amplitude * 0.50).toInt(), 0,
-                (amplitude * 0.68).toInt(), 0,
-                (amplitude * 0.85).toInt(), 0,
-                amplitude, 0,
-                (amplitude * 0.95).toInt(), 0,
-                (amplitude * 0.75).toInt(), 0,
-                (amplitude * 0.45).toInt(), 0
-            )
-
-            val effect = VibrationEffect.createWaveform(timings, amplitudes, -1)
-            vibrator.vibrate(effect)
+            // Create maximum speed continuous vibration at selected intensity (max 255)
+            val amplitude = (vibrationIntensity * 255).toInt()
+            val vibrationEffect = VibrationEffect.createWaveform(longArrayOf(0, 10000), intArrayOf(0, amplitude), -1) // Continuous
+            vibrator.vibrate(vibrationEffect)
         } else {
             @Suppress("DEPRECATION")
-            vibrator.vibrate(
-                longArrayOf(0,180,80,220,60,280,50,340,40,400,35,480,30,580,25,680,20,800,180,1200,400,600,300,400,200,300,150),
-                -1
-            )
+            vibrator.vibrate(longArrayOf(0, 10000), 0) // Continuous for older versions
         }
+        
+        // No restart needed - continuous vibration runs indefinitely
     }
+
     private fun stopVibration() {
         isVibrating = false
         updateStatus(false)

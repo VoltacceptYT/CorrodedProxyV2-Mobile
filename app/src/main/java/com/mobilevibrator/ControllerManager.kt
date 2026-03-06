@@ -15,8 +15,16 @@ data class ControllerDevice(
     val name: String,
     val descriptor: String,
     val hasVibrator: Boolean,
-    val isBluetooth: Boolean
+    val isBluetooth: Boolean,
+    val deviceType: DeviceType
 )
+
+enum class DeviceType {
+    PHONE,
+    XBOX,
+    PLAYSTATION,
+    OTHER
+}
 
 class ControllerManager(private val context: Context) : InputManager.InputDeviceListener {
 
@@ -35,12 +43,14 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
             val device = InputDevice.getDevice(deviceId)
             device?.let {
                 if (isGameController(it)) {
+                    val deviceType = getDeviceType(it)
                     val controller = ControllerDevice(
                         id = it.id,
                         name = it.name,
                         descriptor = it.descriptor,
                         hasVibrator = it.vibrator?.hasVibrator() ?: false,
-                        isBluetooth = isBluetoothDevice(it)
+                        isBluetooth = isBluetoothDevice(it),
+                        deviceType = deviceType
                     )
                     devices.add(controller)
                     
@@ -53,6 +63,15 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
         }
         
         return devices
+    }
+
+    private fun getDeviceType(device: InputDevice): DeviceType {
+        val name = device.name.lowercase()
+        return when {
+            name.contains("xbox") -> DeviceType.XBOX
+            name.contains("playstation") || name.contains("dualshock") || name.contains("dualsense") -> DeviceType.PLAYSTATION
+            else -> DeviceType.OTHER
+        }
     }
 
     fun setDeviceListener(listener: (List<ControllerDevice>) -> Unit) {
@@ -81,27 +100,20 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
         if (!vibrator.hasVibrator()) return
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create vibration effect with specified intensity
-            val amplitude = (intensity * 255).toInt()
-            val vibrationEffect = VibrationEffect.createWaveform(
-                longArrayOf(0, 1000), // Continuous vibration
-                0 // Repeat indefinitely
-            )
+            // Create vibration pattern: 0.5s vibration at different levels with 0.1s delays
+            val timings = longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500)
+            val amplitudes = intArrayOf(0, 51, 0, 102, 0, 153, 0, 204, 0, 255)
             
-            // Set amplitude if supported
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                val combinedEffect = VibrationEffect.createWaveform(
-                    longArrayOf(0, 1000),
-                    intArrayOf(0, amplitude),
-                    0
-                )
-                vibrator.vibrate(combinedEffect)
+                val vibrationEffect = VibrationEffect.createWaveform(timings, amplitudes, -1)
+                vibrator.vibrate(vibrationEffect)
             } else {
+                val vibrationEffect = VibrationEffect.createWaveform(timings, -1)
                 vibrator.vibrate(vibrationEffect)
             }
         } else {
             @Suppress("DEPRECATION")
-            vibrator.vibrate(longArrayOf(0, 1000), 0)
+            vibrator.vibrate(longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500), -1)
         }
     }
 

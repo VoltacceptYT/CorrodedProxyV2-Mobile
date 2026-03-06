@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var spinnerDevices: Spinner
     private lateinit var vibrator: Vibrator
     private lateinit var controllerManager: ControllerManager
+    private lateinit var deviceAdapter: DeviceAdapter
     private var isVibrating = false
     private var selectedDeviceId: Int = -1
     private var useController = false
@@ -80,21 +82,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateDeviceList(devices: List<ControllerDevice>) {
-        val deviceNames = mutableListOf("Phone Vibration")
-        val deviceIds = mutableListOf(-1)
+        val allDevices = mutableListOf<ControllerDevice>()
         
-        devices.forEach { device ->
-            deviceNames.add("${device.name} (${if (device.isBluetooth) "Bluetooth" else "Wired"})")
-            deviceIds.add(device.id)
-        }
+        // Add phone as first device
+        allDevices.add(ControllerDevice(
+            id = -1,
+            name = "Phone Vibration",
+            descriptor = "phone",
+            hasVibrator = vibrator.hasVibrator(),
+            isBluetooth = false,
+            deviceType = DeviceType.PHONE
+        ))
         
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, deviceNames)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerDevices.adapter = adapter
+        // Add controllers
+        allDevices.addAll(devices)
+        
+        // Update adapter with all devices
+        deviceAdapter = DeviceAdapter(this, allDevices)
+        spinnerDevices.adapter = deviceAdapter
         
         spinnerDevices.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
-                selectedDeviceId = deviceIds[position]
+                val selectedDevice = allDevices[position]
+                selectedDeviceId = selectedDevice.id
                 useController = position > 0
                 if (isVibrating) {
                     stopVibration()
@@ -178,15 +188,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun startPhoneVibration() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create continuous vibration effect at maximum amplitude
-            val vibrationEffect = VibrationEffect.createWaveform(
-                longArrayOf(0, 1000), // Pattern: vibrate for 1 second continuously
-                0 // Repeat indefinitely
-            )
-            vibrator.vibrate(vibrationEffect)
+            // Create vibration pattern: 0.5s vibration at different levels with 0.1s delays
+            val timings = longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500)
+            val amplitudes = intArrayOf(0, 51, 0, 102, 0, 153, 0, 204, 0, 255)
+            
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                val vibrationEffect = VibrationEffect.createWaveform(timings, amplitudes, -1)
+                vibrator.vibrate(vibrationEffect)
+            } else {
+                val vibrationEffect = VibrationEffect.createWaveform(timings, -1)
+                vibrator.vibrate(vibrationEffect)
+            }
         } else {
             @Suppress("DEPRECATION")
-            vibrator.vibrate(longArrayOf(0, 1000), 0)
+            vibrator.vibrate(longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500), -1)
         }
     }
 
@@ -203,17 +218,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateStatus(vibrating: Boolean) {
         val deviceName = if (useController) {
-            spinnerDevices.selectedItem?.toString() ?: "Controller"
+            val selectedDevice = deviceAdapter.getItem(spinnerDevices.selectedItemPosition)
+            selectedDevice?.name ?: "Controller"
         } else {
             "Phone"
         }
         
         if (vibrating) {
             tvStatus.text = "$deviceName: Vibration ON"
-            tvStatus.setTextColor("#4CAF50".toInt())
+            tvStatus.setTextColor(ContextCompat.getColor(this, R.color.vibration_on))
         } else {
             tvStatus.text = "$deviceName: Vibration OFF"
-            tvStatus.setTextColor("#FF6B6B".toInt())
+            tvStatus.setTextColor(ContextCompat.getColor(this, R.color.vibration_off))
         }
     }
 

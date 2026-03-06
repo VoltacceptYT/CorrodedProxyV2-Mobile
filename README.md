@@ -1,12 +1,14 @@
-# Mobile Vibrator
+# Device Vibration Tester
 
-A comprehensive Android application for controlling device vibration with maximum intensity using a toggle button. Supports both phone vibration and external game controllers (Bluetooth and wired).
+A comprehensive Android application for testing device vibration with graduated intensity levels. Supports phone vibration and external game controllers (Bluetooth and wired) with automatic device type detection.
 
 ## Features
 
 - **Multi-Device Support**: Control vibration on phone and connected game controllers
-- **Controller Detection**: Automatically detects Bluetooth and wired game controllers
-- **Maximum Vibration Control**: Toggle vibration on/off at maximum speed
+- **Controller Detection**: Automatically detects Bluetooth and wired game controllers with type icons
+- **Graduated Vibration**: 0.5s pattern with increasing intensity levels (20% → 40% → 60% → 80% → 100%)
+- **Smart Delays**: 0.1s pauses between vibration levels for controlled testing
+- **Device Type Icons**: Visual indicators for Xbox, PlayStation, Phone, and Other devices
 - **Android 10+ Support**: Compatible with Android API 29 (Android 10) and above
 - **Clean UI**: Modern Material Design interface with dark theme and device selection
 - **Real-time Status**: Visual feedback showing current vibration state for each device
@@ -23,17 +25,23 @@ A comprehensive Android application for controlling device vibration with maximu
 
 ## Supported Controllers
 
-### Bluetooth Controllers
-- Xbox Wireless Controller
-- PlayStation DualShock/DualSense controllers
+### Bluetooth Controllers 🎮
+- Xbox Wireless Controller ![Xbox](xbox.svg)
+- PlayStation DualShock/DualSense controllers ![PlayStation](playstation.svg)
 - Nintendo Switch Pro Controller
 - Third-party Bluetooth gamepads
 - Any Bluetooth controller with vibration support
 
-### Wired Controllers
+### Wired Controllers 🎮
 - USB game controllers
 - Connected gamepads via OTG
 - Any wired controller with vibration motors
+
+### Device Icons
+- 📱 Phone Vibration - Built-in device vibration
+- 🎮 Xbox Controllers - Microsoft Xbox controllers
+- 🎮 PlayStation Controllers - Sony PlayStation controllers  
+- 🎮 Other Controllers - Generic and third-party controllers
 
 ## Installation
 
@@ -41,34 +49,40 @@ A comprehensive Android application for controlling device vibration with maximu
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/mobile-vibrator.git
-   cd mobile-vibrator
+   git clone https://github.com/yourusername/device-vibration-tester.git
+   cd device-vibration-tester
    ```
 
-2. Build the APK:
+2. Build APK:
    ```bash
    ./gradlew assembleDebug
    ```
 
-3. Install the APK:
+3. Install APK:
    ```bash
    adb install app/build/outputs/apk/debug/app-debug.apk
    ```
 
 ### Option 2: Download APK
 
-Download the latest APK from the [Releases](https://github.com/yourusername/mobile-vibrator/releases) section.
+Download the latest APK from [Releases](https://github.com/yourusername/device-vibration-tester/releases) section.
 
 ## Usage
 
-1. Open the Mobile Vibrator app
+1. Open Device Vibration Tester app
 2. Grant requested permissions (Vibration and Bluetooth)
-3. Select your desired device from the dropdown:
-   - **Phone Vibration**: Control the phone's built-in vibration
-   - **Controller Name**: Control a connected game controller
-4. Use the toggle button to start/stop vibration
-5. The status indicator shows which device is vibrating
-6. Vibration automatically stops when you close the app
+3. Select your desired device from the dropdown menu:
+   - **📱 Phone Vibration**: Test the phone's built-in vibration motor
+   - **🎮 [Controller Name]**: Test connected game controllers with type icons
+4. Use the toggle button to start the vibration test pattern
+5. Watch the graduated intensity sequence:
+   - **Level 1**: 20% intensity for 500ms
+   - **Level 2**: 40% intensity for 500ms  
+   - **Level 3**: 60% intensity for 500ms
+   - **Level 4**: 80% intensity for 500ms
+   - **Level 5**: 100% intensity for 500ms
+6. The status indicator shows which device is currently vibrating
+7. Vibration automatically stops after the complete 2.9-second pattern
 
 ## Technical Details
 
@@ -88,29 +102,33 @@ Download the latest APK from the [Releases](https://github.com/yourusername/mobi
 
 ### Vibration Implementation
 
-The app uses the Android Vibration API with proper handling for different Android versions:
+The app uses Android Vibration API with a sophisticated graduated pattern for comprehensive testing:
 
 - **Android 12+**: Uses `VibratorManager` for enhanced control
 - **Android 10-11**: Uses traditional `Vibrator` service
 - **Controller Vibration**: Uses device-specific vibrators via InputManager
-- **Continuous Vibration**: Creates infinite waveform pattern for maximum effect
-- **Amplitude Control**: Supports intensity control on Android 10+
+- **Graduated Pattern**: 5-level intensity sequence (20% → 40% → 60% → 80% → 100%)
+- **Precise Timing**: 500ms vibration + 100ms pause between each level
+- **Total Duration**: 2.9 seconds complete test pattern
+- **Amplitude Control**: Supports intensity control on Android 10+ (255 = 100%)
+- **No Continuous Loop**: Prevents crashes by using finite pattern instead of infinite
 
 ### Controller Detection
 
 The app automatically detects connected controllers using:
-- **InputManager**: Monitors device connections/disconnections
-- **Device Classification**: Identifies gamepads, joysticks, and controllers
-- **Bluetooth Detection**: Recognizes Bluetooth vs wired connections
-- **Vibration Capability**: Checks if controller supports vibration
+- **InputManager**: Monitors device connections/disconnections in real-time
+- **Device Classification**: Identifies gamepads, joysticks, and controllers by name and source
+- **Type Recognition**: Distinguishes Xbox, PlayStation, and generic controllers
+- **Connection Detection**: Recognizes Bluetooth vs wired connections
+- **Vibration Capability**: Tests and displays device vibration support status
 
 ## GitHub Actions CI/CD
 
 This project includes a GitHub Actions workflow that automatically:
 
-- Builds debug and release APKs
+- Builds debug APK only (optimized for CI/CD)
 - Runs unit tests
-- Performs lint analysis
+- Performs lint analysis  
 - Uploads build artifacts
 
 The workflow triggers on:

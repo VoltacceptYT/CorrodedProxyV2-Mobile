@@ -13,21 +13,25 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
+import android.widget.ImageView
+import android.widget.SeekBar
 import android.widget.Spinner
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
-import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var toggleVibration: SwitchMaterial
+    private lateinit var toggleVibration: Switch
     private lateinit var tvStatus: TextView
-    private lateinit var spinnerDevices: AutoCompleteTextView
+    private lateinit var spinnerDevices: Spinner
+    private lateinit var intensitySlider: SeekBar
+    private lateinit var intensityValue: TextView
+    private lateinit var appIcon: ImageView
     private lateinit var vibrator: Vibrator
     private lateinit var controllerManager: ControllerManager
     private lateinit var deviceAdapter: DeviceAdapter
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     private var selectedDeviceId: Int = -1
     private var useController = false
     private val handler = Handler(Looper.getMainLooper())
-    private var allDevices: List<ControllerDevice> = emptyList()
+    private var vibrationIntensity = 1.0f
     
     companion object {
         private const val BLUETOOTH_PERMISSION_REQUEST_CODE = 100
@@ -67,16 +71,45 @@ class MainActivity : AppCompatActivity() {
         toggleVibration = findViewById(R.id.toggleVibration)
         tvStatus = findViewById(R.id.tvStatus)
         spinnerDevices = findViewById(R.id.spinnerDevices)
-    }
-
-    private fun initVibrator() {
-        vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        intensitySlider = findViewById(R.id.intensitySlider)
+        intensityValue = findViewById(R.id.intensityValue)
+        appIcon = findViewById(R.id.appIcon)
+        
+        // Initialize vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val vibratorManager = getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-            vibratorManager.defaultVibrator
+            vibrator = vibratorManager.defaultVibrator
         } else {
             @Suppress("DEPRECATION")
             getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         }
+        
+        // Set up intensity slider
+        intensitySlider.max = 100
+        intensitySlider.progress = 100
+        intensityValue.text = "100%"
+        
+        intensitySlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                vibrationIntensity = progress / 100f
+                intensityValue.text = "$progress%"
+            }
+            
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+        
+        // Set up toggle listener
+        toggleVibration.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                startMaxVibration()
+            } else {
+                stopVibration()
+            }
+        }
+        
+        // Set app icon
+        appIcon.setImageResource(R.drawable.ic_launcher_foreground)
     }
 
     private fun initControllerManager() {
@@ -112,20 +145,23 @@ class MainActivity : AppCompatActivity() {
         // Add controllers
         allDevices.addAll(devices)
         
-        // Store as class property
-        this.allDevices = allDevices
-        
         // Update adapter with all devices
         deviceAdapter = DeviceAdapter(this, allDevices)
-        spinnerDevices.setAdapter(deviceAdapter)
+        spinnerDevices.adapter = deviceAdapter
         
-        spinnerDevices.setOnItemClickListener { parent, view, position, id ->
-            val selectedDevice = allDevices[position]
-            selectedDeviceId = selectedDevice.id
-            useController = position > 0
-            if (isVibrating) {
-                stopVibration()
-                startMaxVibration()
+        spinnerDevices.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
+                val selectedDevice = allDevices[position]
+                selectedDeviceId = selectedDevice.id
+                useController = position > 0
+                if (isVibrating) {
+                    stopVibration()
+                    startMaxVibration()
+                }
+            }
+            
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
+                // Do nothing
             }
         }
     }
@@ -173,39 +209,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startMaxVibration() {
-        val success = if (useController) {
-            if (selectedDeviceId != -1) {
-                controllerManager.vibrateController(selectedDeviceId, 1.0f)
-                true
-            } else {
-                false
-            }
-        } else {
-            if (!vibrator.hasVibrator()) {
-                false
-            } else {
-                startPhoneVibration()
-                true
-            }
-        }
-
-        if (success) {
+        if (useController && selectedDeviceId != -1) {
+            controllerManager.vibrateController(selectedDeviceId, vibrationIntensity)
             isVibrating = true
             updateStatus(true)
         } else {
-            toggleVibration.isChecked = false
-            Toast.makeText(this, "Selected device does not support vibration", Toast.LENGTH_SHORT).show()
+            startPhoneVibration()
+            isVibrating = true
+            updateStatus(true)
         }
     }
 
     private fun startPhoneVibration() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create vibration pattern: 0.5s vibration at different levels with 0.1s delays
+            // Create vibration pattern with adjustable intensity
             val timings = longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500)
             val amplitudes = intArrayOf(0, 51, 0, 102, 0, 153, 0, 204, 0, 255)
             
+            // Apply intensity scaling
+            val scaledAmplitudes = amplitudes.map { (it * vibrationIntensity).toInt() }.toIntArray()
+            
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                val vibrationEffect = VibrationEffect.createWaveform(timings, amplitudes, -1)
+                val vibrationEffect = VibrationEffect.createWaveform(timings, scaledAmplitudes, -1)
                 vibrator.vibrate(vibrationEffect)
             } else {
                 val vibrationEffect = VibrationEffect.createWaveform(timings, -1)
@@ -239,21 +264,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateStatus(vibrating: Boolean) {
         val deviceName = if (useController) {
-            val position = spinnerDevices.text.toString().let { text ->
-                allDevices.indexOfFirst { it.name == text }
-            }
-            val selectedDevice = if (position >= 0) allDevices[position] else null
+            val selectedDevice = deviceAdapter.getItem(spinnerDevices.selectedItemPosition)
             selectedDevice?.name ?: "Controller"
         } else {
-            "Phone"
+            getString(R.string.device_phone)
         }
         
         if (vibrating) {
-            tvStatus.text = "$deviceName: Vibration ON"
-            tvStatus.setTextColor(ContextCompat.getColor(this, R.color.vibration_on))
+            tvStatus.text = "$deviceName: ${getString(R.string.vibration_on)}"
+            tvStatus.setTextColor(ContextCompat.getColor(this, R.color.success))
         } else {
-            tvStatus.text = "$deviceName: Vibration OFF"
-            tvStatus.setTextColor(ContextCompat.getColor(this, R.color.vibration_off))
+            tvStatus.text = "$deviceName: ${getString(R.string.vibration_off)}"
+            tvStatus.setTextColor(ContextCompat.getColor(this, R.color.text_secondary))
         }
     }
 

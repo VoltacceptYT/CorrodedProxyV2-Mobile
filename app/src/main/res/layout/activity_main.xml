@@ -4,175 +4,227 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_theme_light_background"
+    android:background="@color/background_dark"
     tools:context=".MainActivity">
 
-    <!-- Title Card -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/titleCard"
+    <!-- Top Card with Title and Icon -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/topCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_margin="@dimen/card_margin"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/card_elevation"
-        app:cardBackgroundColor="@color/md_theme_light_surface"
-        app:strokeColor="@color/outline"
-        app:strokeWidth="@dimen/stroke_width"
-        app:rippleColor="@color/md_theme_light_primaryContainer"
-        app:shapeAppearance="@style/ShapeAppearance.MediumComponent"
-        app:layout_constraintBottom_toTopOf="@+id/deviceCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cardBackgroundColor="@color/card_dark"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/default_padding"
-            android:gravity="center">
+            android:orientation="horizontal"
+            android:padding="@dimen/card_padding"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Device Vibration Tester"
-                style="@style/TextAppearance.TitleText" />
+            <ImageView
+                android:id="@+id/appIcon"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/ic_launcher_foreground"
+                android:layout_marginEnd="@dimen/spacing_medium" />
 
-            <TextView
-                android:id="@+id/tvSubtitle"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Control Vibration"
-                style="@style/TextAppearance.SubtitleText" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_size_title"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vibration_tester"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_size_subtitle" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
     <!-- Device Selection Card -->
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/deviceCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_margin="@dimen/card_margin"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/card_elevation"
-        app:cardBackgroundColor="@color/md_theme_light_surface"
-        app:strokeColor="@color/outline"
-        app:strokeWidth="@dimen/stroke_width"
-        app:rippleColor="@color/md_theme_light_primaryContainer"
-        app:shapeAppearance="@style/ShapeAppearance.MediumComponent"
-        app:layout_constraintBottom_toTopOf="@+id/statusCard"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/card_dark"
+        app:layout_constraintTop_toBottomOf="@id/topCard"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleCard">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/default_padding">
+            android:padding="@dimen/card_padding">
 
             <TextView
-                android:id="@+id/tvDeviceLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Device:"
-                style="@style/TextAppearance.DeviceLabel" />
+                android:text="Select Device"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_size_body"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_small" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Spinner"
-                android:id="@+id/spinnerDevicesLayout"
+            <Spinner
+                android:id="@+id/spinnerDevices"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/card_background_dark"
+                android:layout_marginBottom="@dimen/spacing_medium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vibration_intensity"
+                android:textColor="@color/text_secondary"
+                android:textSize="@dimen/text_size_body" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin"
-                android:hint="Select device">
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/spacing_small">
 
-                <AutoCompleteTextView
-                    android:id="@+id/spinnerDevices"
-                    android:layout_width="match_parent"
+                <SeekBar
+                    android:id="@+id/intensitySlider"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/md_theme_light_onSurface"
-                    style="@style/TextAppearance.DeviceLabel" />
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/spacing_small" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/intensityValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100%"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_size_body"
+                    android:minWidth="40dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
     <!-- Status Card -->
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/statusCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_margin="@dimen/card_margin"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/card_elevation"
-        app:cardBackgroundColor="@color/md_theme_light_surface"
-        app:strokeColor="@color/outline"
-        app:strokeWidth="@dimen/stroke_width"
-        app:rippleColor="@color/md_theme_light_primaryContainer"
-        app:shapeAppearance="@style/ShapeAppearance.MediumComponent"
-        app:layout_constraintBottom_toTopOf="@+id/controlCard"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/card_dark"
+        app:layout_constraintTop_toBottomOf="@id/deviceCard"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deviceCard">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/default_padding"
-            android:gravity="center">
+            android:padding="@dimen/card_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_size_body"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_small" />
 
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phone: Vibration OFF"
-                style="@style/TextAppearance.StatusText" />
+                android:text="@string/vibration_off"
+                android:textColor="@color/text_secondary"
+                android:textSize="@dimen/text_size_body" />
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
-    <!-- Control Card -->
-    <com.google.android.material.card.MaterialCardView
+    <!-- Control Card with Switch -->
+    <androidx.cardview.widget.CardView
         android:id="@+id/controlCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_margin="@dimen/card_margin"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/card_elevation"
-        app:cardBackgroundColor="@color/md_theme_light_surface"
-        app:strokeColor="@color/outline"
-        app:strokeWidth="@dimen/stroke_width"
-        app:rippleColor="@color/md_theme_light_primaryContainer"
-        app:shapeAppearance="@style/ShapeAppearance.MediumComponent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/card_dark"
+        app:layout_constraintTop_toBottomOf="@id/statusCard"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusCard">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/large_padding"
-            android:gravity="center">
+            android:orientation="horizontal"
+            android:padding="@dimen/card_padding"
+            android:gravity="center_vertical">
 
-            <com.google.android.material.materialswitch.MaterialSwitch
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test_vibration"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_size_body"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Toggle to test vibration pattern"
+                    android:textColor="@color/text_muted"
+                    android:textSize="@dimen/text_size_body" />
+
+            </LinearLayout>
+
+            <Switch
                 android:id="@+id/toggleVibration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/CustomSwitch" />
+                android:scaleX="@dimen/switch_scale"
+                android:scaleY="@dimen/switch_scale"
+                android:thumbTint="@color/switch_thumb"
+                android:trackTint="@color/switch_track" />
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

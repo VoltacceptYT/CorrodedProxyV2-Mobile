@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Device Vibration Tester</string>
-    
-    <!-- Font families for Material Design 3 -->
-    <string name="font_family_regular">sans-serif</string>
-    <string name="font_family_medium">sans-serif-medium</string>
+    <string name="app_name">VBRT</string>
+    <string name="vibration_tester">Vibration Tester</string>
+    <string name="test_vibration">Test Vibration</string>
+    <string name="vibration_intensity">Vibration Intensity</string>
+    <string name="vibration_off">Vibration OFF</string>
+    <string name="vibration_on">Vibration ON</string>
+    <string name="device_phone">Phone</string>
+    <string name="device_controller">Controller</string>
 </resources>

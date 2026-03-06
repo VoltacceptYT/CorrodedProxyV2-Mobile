@@ -108,12 +108,15 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
         if (!vibrator.hasVibrator()) return
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create vibration pattern: 0.5s vibration at different levels with 0.1s delays
+            // Create vibration pattern with adjustable intensity
             val timings = longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500)
             val amplitudes = intArrayOf(0, 51, 0, 102, 0, 153, 0, 204, 0, 255)
             
+            // Apply intensity scaling
+            val scaledAmplitudes = amplitudes.map { (it * intensity).toInt() }.toIntArray()
+            
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                val vibrationEffect = VibrationEffect.createWaveform(timings, amplitudes, -1)
+                val vibrationEffect = VibrationEffect.createWaveform(timings, scaledAmplitudes, -1)
                 vibrator.vibrate(vibrationEffect)
             } else {
                 val vibrationEffect = VibrationEffect.createWaveform(timings, -1)

@@ -1,43 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Material Design 3 Color Scheme -->
-    <!-- Primary -->
-    <color name="md_theme_light_primary">#6750A4</color>
-    <color name="md_theme_light_onPrimary">#FFFFFF</color>
-    <color name="md_theme_light_primaryContainer">#EADDFF</color>
-    
-    <!-- Secondary -->
-    <color name="md_theme_light_secondary">#625B71</color>
-    <color name="md_theme_light_onSecondary">#FFFFFF</color>
-    <color name="md_theme_light_secondaryContainer">#E8DEF8</color>
-    
-    <!-- Surface and Background -->
-    <color name="md_theme_light_surface">#FEFFFE</color>
-    <color name="md_theme_light_onSurface">#1C1B1B</color>
-    <color name="md_theme_light_background">#FEFFFE</color>
-    <color name="md_theme_light_onBackground">#FEFFFE</color>
-    
-    <!-- Outline and Variant -->
-    <color name="md_theme_light_outline">#B69CC8</color>
-    <color name="md_theme_light_primaryVariant">#5D39B4</color>
-    <color name="md_theme_light_secondaryVariant">#455A64</color>
-    
-    <!-- Status Colors -->
-    <color name="vibration_on">#4CAF50</color>
-    <color name="vibration_off">#CF6679</color>
-    
-    <!-- Custom App Colors (Legacy Support) -->
-    <color name="primary">@color/md_theme_light_primary</color>
-    <color name="primary_variant">@color/md_theme_light_primaryVariant</color>
-    <color name="primary_container">@color/md_theme_light_primaryContainer</color>
-    <color name="secondary">@color/md_theme_light_secondary</color>
-    <color name="secondary_variant">@color/md_theme_light_secondaryVariant</color>
-    <color name="secondary_container">@color/md_theme_light_secondaryContainer</color>
-    <color name="surface">@color/md_theme_light_surface</color>
-    <color name="surface_variant">#F5F5F5</color>
-    <color name="background">@color/md_theme_light_background</color>
-    <color name="on_primary">@color/md_theme_light_onPrimary</color>
-    <color name="on_secondary">@color/md_theme_light_onSecondary</color>
-    <color name="on_surface">@color/md_theme_light_onSurface</color>
-    <color name="outline">@color/md_theme_light_outline</color>
+    <!-- Dark theme colors matching reference design -->
+    <color name="primary">#6366F1</color>
+    <color name="primary_dark">#4F46E5</color>
+    <color name="accent">#10B981</color>
+    <color name="background_dark">#111827</color>
+    <color name="surface_dark">#1F2937</color>
+    <color name="card_dark">#374151</color>
+    <color name="text_primary">#F9FAFB</color>
+    <color name="text_secondary">#D1D5DB</color>
+    <color name="text_muted">#9CA3AF</color>
+    <color name="border_dark">#4B5563</color>
+    <color name="success">#10B981</color>
+    <color name="error">#EF4444</color>
+    <color name="switch_track">#374151</color>
+    <color name="switch_thumb">#10B981</color>
+    <color name="ripple">#6366F1</color>
 </resources>

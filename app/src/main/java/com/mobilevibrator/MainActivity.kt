@@ -121,14 +121,7 @@ class MainActivity : AppCompatActivity() {
         controllerManager.setDeviceListener { devices ->
             updateDeviceList(devices)
         }
-        controllerManager.setVibrationCompleteListener {
-            // Restart controller vibration after 10 seconds for infinite loop
-            if (isVibrating && useController) {
-                runOnUiThread {
-                    startMaxVibration()
-                }
-            }
-        }
+        // No vibration completion callback needed since vibration is continuous
     }
 
     private fun updateDeviceList(devices: List<ControllerDevice>) {
@@ -224,21 +217,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun startPhoneVibration() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create continuous vibration at maximum amplitude (16-bit limit: 65535)
-            val amplitude = minOf((vibrationIntensity * 65535).toInt(), 65535)
-            val vibrationEffect = VibrationEffect.createOneShot(10000, amplitude) // 10 seconds
+            // Create maximum speed continuous vibration at selected intensity (10x stronger)
+            val amplitude = (vibrationIntensity * 255 * 10).toInt()
+            val vibrationEffect = VibrationEffect.createWaveform(longArrayOf(0, 10000), intArrayOf(0, amplitude), -1) // Continuous
             vibrator.vibrate(vibrationEffect)
         } else {
             @Suppress("DEPRECATION")
-            vibrator.vibrate(10000) // 10 seconds for older versions
+            vibrator.vibrate(longArrayOf(0, 10000), 0) // Continuous for older versions
         }
         
-        // Schedule restart after 10 seconds to create infinite loop
-        handler.postDelayed({
-            if (isVibrating && !useController) {
-                startPhoneVibration() // Restart vibration
-            }
-        }, 10000) // Restart after 10 seconds
+        // No restart needed - continuous vibration runs indefinitely
     }
 
     private fun stopVibration() {

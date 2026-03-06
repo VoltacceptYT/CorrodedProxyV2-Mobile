@@ -84,7 +84,8 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
     }
 
     fun setVibrationCompleteListener(listener: () -> Unit) {
-        vibrationCompleteListener = listener
+        // No longer needed since vibration is continuous and doesn't restart
+        // Keeping method for compatibility but it won't be called
     }
 
     fun vibrateController(deviceId: Int, intensity: Float = 1.0f) {
@@ -108,19 +109,16 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
         if (!vibrator.hasVibrator()) return
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create continuous vibration at maximum amplitude (16-bit limit: 65535)
-            val amplitude = minOf((intensity * 65535).toInt(), 65535)
-            val vibrationEffect = VibrationEffect.createOneShot(10000, amplitude) // 10 seconds
+            // Create maximum speed continuous vibration at selected intensity (10x stronger)
+            val amplitude = (intensity * 255 * 10).toInt()
+            val vibrationEffect = VibrationEffect.createWaveform(longArrayOf(0, 10000), intArrayOf(0, amplitude), -1) // Continuous
             vibrator.vibrate(vibrationEffect)
         } else {
             @Suppress("DEPRECATION")
-            vibrator.vibrate(10000) // 10 seconds for older versions
+            vibrator.vibrate(longArrayOf(0, 10000), 0) // Continuous for older versions
         }
         
-        // Schedule restart after 10 seconds to create infinite loop
-        handler.postDelayed({
-            vibrationCompleteListener?.invoke()
-        }, 10000) // Restart after 10 seconds
+        // No restart needed - continuous vibration runs indefinitely
     }
 
     private fun isGameController(device: InputDevice): Boolean {

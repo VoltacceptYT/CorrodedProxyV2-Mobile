@@ -31,7 +31,7 @@
                 android:id="@+id/appIcon"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
-                android:src="@drawable/ic_launcher_foreground"
+                android:src="@mipmap/ic_launcher"
                 android:layout_marginEnd="@dimen/spacing_medium" />
 
             <LinearLayout

@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         }
         
         // Set app icon
-        appIcon.setImageResource(R.drawable.ic_launcher_foreground)
+        appIcon.setImageResource(R.mipmap.ic_launcher)
     }
 
     private fun initControllerManager() {

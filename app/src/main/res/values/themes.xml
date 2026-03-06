@@ -14,13 +14,12 @@
         <item name="android:navigationBarColor" tools:targetApi="l">@color/primary_variant</item>
         <!-- Window and background colors. -->
         <item name="android:windowBackground">@color/background</item>
-        <item name="android:colorBackground">@color/background</item>
-        <item name="android:colorSurface">@color/surface</item>
-        <item name="android:colorOnSurface">@color/on_surface</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
         <!-- Rounded corners and modern styling. -->
-        <item name="android:windowCornerRadius">16dp</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher</item>
-        <item name="android:windowSplashScreenBackground">@color/background</item>
+        <item name="android:windowCornerRadius" tools:targetApi="l">16dp</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="l">@mipmap/ic_launcher</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="l">@color/background</item>
         <!-- Custom widget styles. -->
         <item name="cardViewStyle">@style/Widget.CardView</item>
         <item name="spinnerStyle">@style/Widget.Spinner</item>

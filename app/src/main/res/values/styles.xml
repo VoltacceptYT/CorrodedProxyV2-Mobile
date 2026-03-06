@@ -11,7 +11,7 @@
     </style>
     
     <!-- Modern spinner style -->
-    <style name="Widget.Spinner" parent="Widget.MaterialComponents.Spinner">
+    <style name="Widget.Spinner" parent="Widget.AppCompat.Spinner">
         <item name="android:background">@drawable/spinner_background</item>
         <item name="android:popupBackground">@drawable/spinner_dropdown_background</item>
         <item name="android:textColor">@color/on_primary</item>

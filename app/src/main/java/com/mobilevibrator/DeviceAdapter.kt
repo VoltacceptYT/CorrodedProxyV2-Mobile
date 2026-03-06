@@ -5,12 +5,11 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatCheckedTextView
 import androidx.core.content.ContextCompat
-import com.google.android.material.R
 import com.mobilevibrator.ControllerDevice
 import com.mobilevibrator.DeviceType
 
@@ -31,7 +30,7 @@ class DeviceAdapter(
         
         // Set device name
         textView.text = device.name
-        textView.setTextColor(ContextCompat.getColor(context, R.color.on_surface))
+        textView.setTextColor(ContextCompat.getColor(context, com.mobilevibrator.R.color.on_surface))
         
         // Get appropriate Material Design icon
         val iconDrawable = getDeviceIcon(device.deviceType)
@@ -73,10 +72,10 @@ class DeviceAdapter(
     
     private fun getDeviceIcon(deviceType: DeviceType): Drawable? {
         return when (deviceType) {
-            DeviceType.PHONE -> ContextCompat.getDrawable(context, R.drawable.ic_device_vibration)
-            DeviceType.XBOX -> ContextCompat.getDrawable(context, R.drawable.ic_gamepad)
-            DeviceType.PLAYSTATION -> ContextCompat.getDrawable(context, R.drawable.ic_gamepad)
-            DeviceType.OTHER -> ContextCompat.getDrawable(context, R.drawable.ic_devices_other)
+            DeviceType.PHONE -> ContextCompat.getDrawable(context, com.mobilevibrator.R.drawable.ic_device_vibration)
+            DeviceType.XBOX -> ContextCompat.getDrawable(context, com.mobilevibrator.R.drawable.ic_gamepad)
+            DeviceType.PLAYSTATION -> ContextCompat.getDrawable(context, com.mobilevibrator.R.drawable.ic_gamepad)
+            DeviceType.OTHER -> ContextCompat.getDrawable(context, com.mobilevibrator.R.drawable.ic_devices_other)
         }
     }
 }

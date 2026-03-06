@@ -240,7 +240,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateStatus(vibrating: Boolean) {
         val deviceName = if (useController) {
-            val selectedDevice = deviceAdapter.getItem(spinnerDevices.selectedItemPosition)
+            val selectedDevice = deviceAdapter.getItem(spinnerDevices.selectedItemPosition) as? ControllerDevice
             selectedDevice?.name ?: "Controller"
         } else {
             "Phone"

@@ -109,7 +109,7 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
         if (!vibrator.hasVibrator()) return
 
         val maxAmplitude = 255
-        val baseAmplitude = (intensity * maxAmplitude).coerceIn(1, maxAmplitude)  // avoid 0
+        val baseAmplitude = (intensity * maxAmplitude).coerceIn(1f, maxAmplitude.toFloat())  // avoid 0
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // timings:    delay, ON, OFF, ON, OFF, ...
@@ -138,7 +138,7 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
                 (baseAmplitude * 0.50).toInt(), 0,
                 (baseAmplitude * 0.68).toInt(), 0,
                 (baseAmplitude * 0.85).toInt(), 0,
-                baseAmplitude, 0,
+                baseAmplitude.toInt(), 0,
                 (baseAmplitude * 0.95).toInt(), 0,
                 (baseAmplitude * 0.75).toInt(), 0,
                 (baseAmplitude * 0.45).toInt(), 0,

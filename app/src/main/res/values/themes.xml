@@ -21,7 +21,6 @@
         <item name="android:windowSplashScreenBackground">@color/background_dark</item>
         <!-- Custom widget styles. -->
         <item name="cardViewStyle">@style/Widget.CardView</item>
-        <item name="spinnerStyle">@style/Widget.Spinner</item>
         <item name="switchStyle">@style/CustomSwitch</item>
     </style>
 </resources>

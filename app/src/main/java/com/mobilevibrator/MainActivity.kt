@@ -217,8 +217,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun startPhoneVibration() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create maximum speed continuous vibration at selected intensity (10x stronger)
-            val amplitude = (vibrationIntensity * 255 * 10).toInt()
+            // Create maximum speed continuous vibration at selected intensity (max 255)
+            val amplitude = (vibrationIntensity * 255).toInt()
             val vibrationEffect = VibrationEffect.createWaveform(longArrayOf(0, 10000), intArrayOf(0, amplitude), -1) // Continuous
             vibrator.vibrate(vibrationEffect)
         } else {

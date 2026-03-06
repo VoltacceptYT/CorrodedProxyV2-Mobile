@@ -3,6 +3,8 @@ package com.mobilevibrator
 import android.content.Context
 import android.hardware.input.InputManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
@@ -31,6 +33,8 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
     private val inputManager = context.getSystemService(Context.INPUT_SERVICE) as InputManager
     private val deviceVibrators = mutableMapOf<Int, Vibrator>()
     private var deviceListener: ((List<ControllerDevice>) -> Unit)? = null
+    private val handler = Handler(Looper.getMainLooper())
+    private var vibrationCompleteListener: (() -> Unit)? = null
     
     init {
         inputManager.registerInputDeviceListener(this, null)
@@ -79,6 +83,10 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
         listener(getConnectedControllers())
     }
 
+    fun setVibrationCompleteListener(listener: () -> Unit) {
+        vibrationCompleteListener = listener
+    }
+
     fun vibrateController(deviceId: Int, intensity: Float = 1.0f) {
         val vibrator = deviceVibrators[deviceId]
         vibrator?.let { vibrateDevice(it, intensity) }
@@ -115,6 +123,11 @@ class ControllerManager(private val context: Context) : InputManager.InputDevice
             @Suppress("DEPRECATION")
             vibrator.vibrate(longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500), -1)
         }
+        
+        // Auto-turn off toggle after vibration completes (2.9 seconds)
+        handler.postDelayed({
+            vibrationCompleteListener?.invoke()
+        }, 2900) // 2.9 seconds total duration
     }
 
     private fun isGameController(device: InputDevice): Boolean {

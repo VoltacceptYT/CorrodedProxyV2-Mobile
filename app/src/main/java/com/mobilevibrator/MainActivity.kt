@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private var isVibrating = false
     private var selectedDeviceId: Int = -1
     private var useController = false
+    private val handler = Handler(Looper.getMainLooper())
     
     companion object {
         private const val BLUETOOTH_PERMISSION_REQUEST_CODE = 100
@@ -78,6 +81,16 @@ class MainActivity : AppCompatActivity() {
         controllerManager = ControllerManager(this)
         controllerManager.setDeviceListener { devices ->
             updateDeviceList(devices)
+        }
+        controllerManager.setVibrationCompleteListener {
+            // Auto-turn off toggle after controller vibration completes
+            if (isVibrating && useController) {
+                runOnUiThread {
+                    toggleVibration.isChecked = false
+                    isVibrating = false
+                    updateStatus(false)
+                }
+            }
         }
     }
 
@@ -203,6 +216,15 @@ class MainActivity : AppCompatActivity() {
             @Suppress("DEPRECATION")
             vibrator.vibrate(longArrayOf(0, 500, 100, 500, 100, 500, 100, 500, 100, 500), -1)
         }
+        
+        // Auto-turn off toggle after vibration completes (2.9 seconds)
+        handler.postDelayed({
+            if (isVibrating && !useController) {
+                toggleVibration.isChecked = false
+                isVibrating = false
+                updateStatus(false)
+            }
+        }, 2900) // 2.9 seconds total duration
     }
 
     private fun stopVibration() {

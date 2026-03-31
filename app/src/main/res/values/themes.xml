@@ -1,18 +1,70 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.CorrodedProxy" parent="Theme.Material3.DayNight">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/md_theme_light_primary</item>
-        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
-        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/md_theme_light_secondary</item>
-        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
-        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/md_theme_light_primary</item>
-        <!-- Customize your theme here. -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.CorrodedProxyV2" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/background_primary</item>
+        <item name="colorPrimaryVariant">@color/background_secondary</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/earth_accent</item>
+        <item name="colorSecondaryVariant">@color/earth_accent</item>
+        <item name="colorOnSecondary">@color/background_primary</item>
+        <item name="colorSurface">@color/background_settings</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorBackground">@color/background_primary</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        <item name="android:colorBackground">@color/background_primary</item>
+        <item name="android:statusBarColor">@color/background_primary</item>
+        <item name="android:navigationBarColor">@color/background_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="rippleColor">@color/ripple_dark</item>
+    </style>
+
+    <style name="Theme.CorrodedProxyV2.Translucent" parent="Theme.CorrodedProxyV2">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+    </style>
+
+    <style name="ContextMenuDialog" parent="Theme.Material3.Dark.Dialog">
+        <item name="android:windowBackground">@drawable/context_menu_background</item>
+        <item name="android:windowElevation">16dp</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+        <item name="android:windowEnterAnimation">@anim/context_menu_in</item>
+        <item name="android:windowExitAnimation">@anim/context_menu_out</item>
+    </style>
+
+    <style name="TabStyle">
+        <item name="android:background">@drawable/tab_background</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:layout_height">44dp</item>
+    </style>
+
+    <style name="NavButton">
+        <item name="android:background">@drawable/nav_button_background</item>
+        <item name="android:layout_width">44dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:tint">@color/text_primary</item>
+    </style>
+
+    <style name="FindBarEditText" parent="Widget.Material3.TextInputEditText">
+        <item name="android:background">@drawable/find_bar_input_bg</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorHint">@color/text_placeholder</item>
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">textUri</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="SearchBarEditText" parent="Widget.Material3.TextInputEditText">
+        <item name="android:background">@drawable/search_bar_background</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorHint">@color/text_placeholder</item>
+        <item name="android:imeOptions">actionGo|flagNoExtractUi</item>
+        <item name="android:inputType">textUri</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingStart">44dp</item>
+        <item name="android:paddingEnd">16dp</item>
     </style>
 </resources>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_primary"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="60dp"
+        android:paddingBottom="40dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
+
+        <!-- "Corroded" Title -->
+        <TextView
+            android:id="@+id/corroded_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/corroded_title"
+            android:textSize="52sp"
+            android:fontFamily="@font/inter"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:letterSpacing="0.1"
+            android:textAllCaps="true"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Splash subtitle -->
+        <TextView
+            android:id="@+id/splash_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/text_dark"
+            android:fontFamily="@font/inter"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Search bar on new tab -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:background="@drawable/new_tab_search_bg"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="40dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_search"
+                android:tint="@color/text_secondary"
+                android:importantForAccessibility="no"
+                android:layout_marginEnd="12dp" />
+
+            <EditText
+                android:id="@+id/new_tab_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_placeholder"
+                android:hint="@string/search_placeholder"
+                android:textSize="16sp"
+                android:imeOptions="actionGo|flagNoExtractUi"
+                android:inputType="textUri"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <!-- Quick links section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quick Links"
+            android:textSize="18sp"
+            android:textColor="@color/text_primary"
+            android:fontFamily="@font/inter"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <GridLayout
+            android:id="@+id/quick_links_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="4"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Incognito indicator (shown in incognito mode) -->
+        <LinearLayout
+            android:id="@+id/incognito_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_bg"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_incognito"
+                android:tint="@color/text_secondary"
+                android:layout_marginEnd="12dp"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/incognito_hint"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="@font/inter" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

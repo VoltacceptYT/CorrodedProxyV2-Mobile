@@ -1,25 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="md_theme_light_primary">#006493</color>
-    <color name="md_theme_light_onPrimary">#FFFFFF</color>
-    <color name="md_theme_light_primaryContainer">#CAE6FF</color>
-    <color name="md_theme_light_onPrimaryContainer">#001E30</color>
-    <color name="md_theme_light_secondary">#50607A</color>
-    <color name="md_theme_light_onSecondary">#FFFFFF</color>
-    <color name="md_theme_light_secondaryContainer">#D8E4F8</color>
-    <color name="md_theme_light_onSecondaryContainer">#0C1D35</color>
-    <color name="md_theme_light_tertiary">#65587B</color>
-    <color name="md_theme_light_onTertiary">#FFFFFF</color>
-    <color name="md_theme_light_tertiaryContainer">#ECDCFF</color>
-    <color name="md_theme_light_onTertiaryContainer">#201634</color>
-    <color name="md_theme_light_error">#BA1A1A</color>
-    <color name="md_theme_light_onError">#FFFFFF</color>
-    <color name="md_theme_light_errorContainer">#FFDAD6</color>
-    <color name="md_theme_light_onErrorContainer">#410002</color>
-    <color name="md_theme_light_background">#FDFBFF</color>
-    <color name="md_theme_light_onBackground">#1A1B1E</color>
-    <color name="md_theme_light_surface">#FDFBFF</color>
-    <color name="md_theme_light_onSurface">#1A1B1E</color>
-    <color name="md_theme_light_surfaceVariant">#DDE3EA</color>
-    <color name="md_theme_light_onSurfaceVariant">#41474D</color>
+    <!-- Base dark background colors -->
+    <color name="background_primary">#FF222222</color>
+    <color name="background_secondary">#FF2A2A2A</color>
+    <color name="background_nav">#CC1A1A1A</color>
+    <color name="background_input">#9945454545</color>
+    <color name="background_column">#FF353535</color>
+    <color name="background_settings">#FF2A2A2A</color>
+    <color name="background_buttons">#FF333333</color>
+    <color name="tab_active">#FF444444</color>
+    <color name="tab_inactive">#FF2A2A2A</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#FFAAAAAA</color>
+    <color name="text_dark">#FF555555</color>
+    <color name="text_placeholder">#FFAAAAAA</color>
+
+    <!-- Action colors -->
+    <color name="accent_green">#FF4CAF50</color>
+    <color name="accent_red">#FFF44336</color>
+    <color name="accent_blue">#FF2196F3</color>
+
+    <!-- Theme accents (Earth default) -->
+    <color name="earth_accent">#FF3AE474</color>
+    <color name="virellus_accent">#FF6F5FFD</color>
+    <color name="neptune_accent">#FF019DEA</color>
+    <color name="mars_accent">#FFF60A11</color>
+    <color name="solar_accent">#FFFF9C00</color>
+
+    <!-- Earth theme -->
+    <color name="earth_bg_primary">#FF1A2A1A</color>
+    <color name="earth_bg_secondary">#FF263D26</color>
+    <color name="earth_bg_settings">#FF1E2E1E</color>
+    <color name="earth_tab_active">#FF2D4A2D</color>
+
+    <!-- Virellus theme -->
+    <color name="virellus_bg_primary">#FF1A1A2A</color>
+    <color name="virellus_bg_secondary">#FF26263D</color>
+    <color name="virellus_bg_settings">#FF1E1E2E</color>
+    <color name="virellus_tab_active">#FF2D2D4A</color>
+
+    <!-- Neptune theme -->
+    <color name="neptune_bg_primary">#FF1A1F2A</color>
+    <color name="neptune_bg_secondary">#FF262B3D</color>
+    <color name="neptune_bg_settings">#FF1E212E</color>
+    <color name="neptune_tab_active">#FF2D334A</color>
+
+    <!-- Mars theme -->
+    <color name="mars_bg_primary">#FF2A1A1A</color>
+    <color name="mars_bg_secondary">#FF3D2626</color>
+    <color name="mars_bg_settings">#FF2E1E1E</color>
+    <color name="mars_tab_active">#FF4A2D2D</color>
+
+    <!-- Solar theme -->
+    <color name="solar_bg_primary">#FF2A1F15</color>
+    <color name="solar_bg_secondary">#FF3D2D20</color>
+    <color name="solar_bg_settings">#FF2E2115</color>
+    <color name="solar_tab_active">#FF4A3520</color>
+
+    <!-- Scrollbar / divider -->
+    <color name="divider">#33FFFFFF</color>
+    <color name="ripple_dark">#33FFFFFF</color>
+
+    <!-- Status colors -->
+    <color name="error">#FFF44336</color>
+    <color name="warning">#FFFF9800</color>
+    <color name="success">#FF4CAF50</color>
+
+    <!-- Context menu -->
+    <color name="context_menu_bg">#EE2A2A2A</color>
+    <color name="context_menu_item_hover">#FF333333</color>
+
+    <!-- Transparent -->
+    <color name="transparent">#00000000</color>
+    <color name="scrim">#88000000</color>
 </resources>

@@ -1,186 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#222"
-    tools:context=".MainActivity">
+    android:background="@color/background_primary">
 
-    <!-- Top Navigation Bar with Tabs -->
+    <!-- Main content area -->
     <LinearLayout
-        android:id="@+id/top_nav"
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:background="#333"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="0dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- Left side: Tabs and Add Tab -->
-        <HorizontalScrollView
-            android:id="@+id/tabs_container"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:id="@+id/tabs_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="bottom" />
-
-        </HorizontalScrollView>
-
-        <!-- Add Tab Button -->
-        <ImageButton
-            android:id="@+id/add_tab_btn"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:background="#353535"
-            android:src="@drawable/ic_add"
-            android:tint="#fff"
-            android:contentDescription="Add tab" />
-
-        <!-- Drag Area (flexible space) -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <!-- Settings Button -->
-        <ImageButton
-            android:id="@+id/settings_btn"
-            android:layout_width="46dp"
-            android:layout_height="36dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/ic_settings"
-            android:tint="#fff"
-            android:contentDescription="Settings" />
-
-    </LinearLayout>
-
-    <!-- Navigation Bar with URL/Search -->
-    <LinearLayout
-        android:id="@+id/nav_bar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#333"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp">
-
+        <!-- Tab Bar -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:id="@+id/tab_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tab_bar_height"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:background="@color/background_primary"
+            android:gravity="center_vertical"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp">
 
-            <!-- Home Button -->
-            <ImageButton
-                android:id="@+id/home_btn"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginRight="4dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_home"
-                android:tint="#fff"
-                android:contentDescription="Home" />
-
-            <!-- Back Button -->
-            <ImageButton
-                android:id="@+id/back_btn"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginRight="4dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_arrow_back"
-                android:tint="#fff"
-                android:contentDescription="Back" />
-
-            <!-- Forward Button -->
-            <ImageButton
-                android:id="@+id/forward_btn"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginRight="4dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_arrow_forward"
-                android:tint="#fff"
-                android:contentDescription="Forward" />
-
-            <!-- Reload Button -->
-            <ImageButton
-                android:id="@+id/reload_btn"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginRight="4dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_refresh"
-                android:tint="#fff"
-                android:contentDescription="Reload" />
-
-            <!-- URL/Search Bar -->
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tab_recycler"
                 android:layout_width="0dp"
-                android:layout_height="32dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#4545459e"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="0dp"
-                android:backgroundTint="#4545459e">
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                tools:listitem="@layout/item_tab" />
 
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginLeft="12dp"
-                    android:src="@drawable/ic_search"
-                    android:tint="#aaa" />
+            <ImageButton
+                android:id="@+id/btn_add_tab"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/nav_button_background"
+                android:src="@drawable/ic_add"
+                android:contentDescription="@string/add_tab"
+                android:tint="@color/text_primary"
+                android:padding="6dp"
+                android:layout_marginStart="4dp" />
 
-                <EditText
-                    android:id="@+id/url_bar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="Search or enter a new URL"
-                    android:textColorHint="#aaa"
-                    android:textColor="#fff"
-                    android:textSize="14sp"
-                    android:padding="0dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="16dp"
-                    android:inputType="textUri"
-                    android:imeOptions="actionGo"
-                    android:singleLine="true" />
-
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/btn_tab_count"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
+                android:background="@drawable/nav_button_background"
+                android:contentDescription="@string/tab_count"
+                android:layout_marginStart="2dp" />
 
         </LinearLayout>
 
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <!-- Address/Nav Bar -->
+        <LinearLayout
+            android:id="@+id/nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nav_bar_height"
+            android:orientation="horizontal"
+            android:background="@color/background_secondary"
+            android:gravity="center_vertical"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp">
+
+            <ImageButton
+                android:id="@+id/btn_home"
+                android:layout_width="@dimen/nav_button_size"
+                android:layout_height="@dimen/nav_button_size"
+                android:background="@drawable/nav_button_background"
+                android:src="@drawable/ic_home"
+                android:contentDescription="@string/home"
+                android:tint="@color/text_primary"
+                android:padding="10dp" />
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="@dimen/nav_button_size"
+                android:layout_height="@dimen/nav_button_size"
+                android:background="@drawable/nav_button_background"
+                android:src="@drawable/ic_back"
+                android:contentDescription="@string/go_back"
+                android:tint="@color/text_primary"
+                android:padding="10dp" />
+
+            <ImageButton
+                android:id="@+id/btn_forward"
+                android:layout_width="@dimen/nav_button_size"
+                android:layout_height="@dimen/nav_button_size"
+                android:background="@drawable/nav_button_background"
+                android:src="@drawable/ic_forward"
+                android:contentDescription="@string/go_forward"
+                android:tint="@color/text_primary"
+                android:padding="10dp" />
+
+            <!-- Search/URL bar -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp">
+
+                <EditText
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/search_bar_background"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_placeholder"
+                    android:hint="@string/search_placeholder"
+                    android:textSize="14sp"
+                    android:imeOptions="actionGo|flagNoExtractUi"
+                    android:inputType="textUri"
+                    android:singleLine="true"
+                    android:paddingStart="44dp"
+                    android:paddingEnd="12dp"
+                    android:selectAllOnFocus="true" />
+
+                <ImageView
+                    android:id="@+id/search_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/ic_search"
+                    android:tint="@color/text_secondary"
+                    android:importantForAccessibility="no" />
+
+            </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/btn_reload"
+                android:layout_width="@dimen/nav_button_size"
+                android:layout_height="@dimen/nav_button_size"
+                android:background="@drawable/nav_button_background"
+                android:src="@drawable/ic_refresh"
+                android:contentDescription="@string/reload"
+                android:tint="@color/text_primary"
+                android:padding="10dp" />
+
+            <ImageButton
+                android:id="@+id/btn_menu"
+                android:layout_width="@dimen/nav_button_size"
+                android:layout_height="@dimen/nav_button_size"
+                android:background="@drawable/nav_button_background"
+                android:src="@drawable/ic_more_vert"
+                android:contentDescription="@string/settings"
+                android:tint="@color/text_primary"
+                android:padding="10dp" />
+
+        </LinearLayout>
+
+        <!-- Progress Bar (below nav) -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:progressDrawable="@drawable/progress_bar_drawable"
+            android:max="100"
+            android:progress="0"
+            android:visibility="gone" />
+
+        <!-- WebView container -->
+        <FrameLayout
+            android:id="@+id/webview_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- New Tab Page (shown when no URL loaded) -->
+            <include
+                android:id="@+id/new_tab_page"
+                layout="@layout/layout_new_tab"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
     </LinearLayout>
 
-    <!-- WebView Container -->
-    <FrameLayout
-        android:id="@+id/webview_container"
+    <!-- Find In Page Bar (overlaid at top when visible) -->
+    <LinearLayout
+        android:id="@+id/find_bar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#222">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/background_settings"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        app:layout_anchor="@id/coordinator_layout"
+        app:layout_anchorGravity="top">
 
-        <WebView
-            android:id="@+id/webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="12dp" />
+        <EditText
+            android:id="@+id/find_input"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/find_bar_input_bg"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_placeholder"
+            android:hint="@string/find_in_page_hint"
+            android:textSize="14sp"
+            android:paddingStart="12dp"
+            android:paddingEnd="8dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:singleLine="true" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/find_results_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"
+            android:minWidth="60dp"
+            android:gravity="center" />
 
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/btn_find_prev"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/nav_button_background"
+            android:src="@drawable/ic_arrow_up"
+            android:tint="@color/text_primary"
+            android:contentDescription="Previous"
+            android:padding="6dp"
+            android:layout_marginStart="4dp" />
+
+        <ImageButton
+            android:id="@+id/btn_find_next"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/nav_button_background"
+            android:src="@drawable/ic_arrow_down"
+            android:tint="@color/text_primary"
+            android:contentDescription="Next"
+            android:padding="6dp"
+            android:layout_marginStart="4dp" />
+
+        <ImageButton
+            android:id="@+id/btn_find_close"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/nav_button_background"
+            android:src="@drawable/ic_close"
+            android:tint="@color/text_primary"
+            android:contentDescription="@string/close"
+            android:padding="6dp"
+            android:layout_marginStart="4dp" />
+
+    </LinearLayout>
+
+    <!-- Context Menu (positioned dynamically) -->
+    <include
+        android:id="@+id/context_menu"
+        layout="@layout/layout_context_menu"
+        android:visibility="gone" />
+
+    <!-- Download bar (overlay) -->
+    <include
+        android:id="@+id/download_bar"
+        layout="@layout/layout_download_bar"
+        android:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

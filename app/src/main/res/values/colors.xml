@@ -73,6 +73,6 @@
     <color name="context_menu_item_hover">#FF333333</color>
 
     <!-- Transparent -->
-    <color name="transparent">#00000000</color>
+    <color name="transparent_custom">#00000000</color>
     <color name="scrim">#88000000</color>
 </resources>

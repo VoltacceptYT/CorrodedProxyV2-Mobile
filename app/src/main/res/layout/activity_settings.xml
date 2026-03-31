@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Theme Settings Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2a2a2a"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:radius="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Theme Selection"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <RadioGroup
+                android:id="@+id/theme_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radio_earth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Earth"
+                    android:textColor="#fff"
+                    android:buttonTint="#fff"
+                    android:layout_marginBottom="8dp" />
+
+                <RadioButton
+                    android:id="@+id/radio_virellus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Virellus"
+                    android:textColor="#fff"
+                    android:buttonTint="#fff"
+                    android:layout_marginBottom="8dp" />
+
+                <RadioButton
+                    android:id="@+id/radio_neptune"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Neptune"
+                    android:textColor="#fff"
+                    android:buttonTint="#fff"
+                    android:layout_marginBottom="8dp" />
+
+                <RadioButton
+                    android:id="@+id/radio_mars"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mars"
+                    android:textColor="#fff"
+                    android:buttonTint="#fff"
+                    android:layout_marginBottom="8dp" />
+
+                <RadioButton
+                    android:id="@+id/radio_solar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Solar"
+                    android:textColor="#fff"
+                    android:buttonTint="#fff" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <!-- Browser Settings Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2a2a2a"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:radius="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Browser Settings"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Enable JavaScript"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/javascript_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:trackTint="#444"
+                    android:thumbTint="#ccc" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Enable Cookies"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/cookies_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:trackTint="#444"
+                    android:thumbTint="#ccc" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Enable History"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/history_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:trackTint="#444"
+                    android:thumbTint="#ccc" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Save"
+                android:textColor="#fff"
+                android:background="#4caf50" />
+
+            <Button
+                android:id="@+id/reset_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Reset"
+                android:textColor="#fff"
+                android:background="#f44336" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/import_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Import"
+                android:textColor="#fff"
+                android:background="#009688" />
+
+            <Button
+                android:id="@+id/export_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Export"
+                android:textColor="#fff"
+                android:background="#ea76cb" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

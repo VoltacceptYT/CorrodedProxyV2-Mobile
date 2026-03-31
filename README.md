@@ -1,41 +1,23 @@
-# VBRT - A Girl's Best Friend
+# CorrodedProxyV2 Android
 
-A modern Android application for testing device vibration with adjustable intensity levels. Supports phone vibration and external game controllers (Bluetooth and wired) with automatic device type detection.
+A modern Android web browser application that provides a 1:1 experience matching the desktop CorrodedProxyV2. Features tab management, navigation controls, theme support, and a complete browsing experience with WebView integration.
 
 ## Features
 
-- **Multi-Device Support**: Control vibration on phone and connected game controllers
-- **Controller Detection**: Automatically detects Bluetooth and wired game controllers with type icons
-- **Adjustable Intensity**: 0-100% vibration intensity control with real-time feedback
-- **Infinite Vibration**: Continuous vibration that runs until manually stopped
-- **Live Updates**: Real-time intensity changes while vibrating
-- **Smart Delays**: 10-second cycles with seamless restart for continuous operation
-- **Device Type Icons**: Visual indicators for Xbox, PlayStation, Phone, and Other devices
-- **Android 12+ Support**: Compatible with Android API 31 (Android 12) and above
-- **Hot Pink Theme**: Modern hot pink and bubblegum pink interface with card-based layout
-- **Real-time Status**: Visual feedback showing current vibration state for each device
-- **Automatic Cleanup**: Properly stops vibration when app is closed
-- **Bluetooth Support**: Full Bluetooth controller compatibility with proper permissions
+- **Tab Management**: Multiple tabs with individual WebView instances, visual active tab indication, and seamless tab switching
+- **Navigation Controls**: Full browser navigation with back, forward, reload, and home buttons
+- **URL/Search Bar**: Intelligent URL handling with automatic search for non-URL queries
+- **Settings System**: Theme selection (Earth, Virellus, Neptune, Mars, Solar) and browser preferences
+- **Context Menu**: Long-press context menu with navigation and settings options
+- **Dark Theme**: Modern dark interface matching desktop version (#222 background, #333 UI elements)
+- **Icon-Based UI**: Clean, intuitive interface with Material Design icons
+- **Responsive Design**: Optimized for various screen sizes and orientations
 
 ## Requirements
 
 - Android 12 (API level 31) or higher
-- Device with vibration capability
-- Vibration permission (automatically requested)
-- Bluetooth permissions for controller support (automatically requested)
-- Optional: Game controller with vibration capability
-
-## Supported Controllers
-
-### Bluetooth Controllers 🎮
-- Xbox Wireless Controller ![Xbox](xbox.svg)
-- PlayStation DualShock/DualSense controllers ![PlayStation](playstation.svg)
-- Generic Bluetooth gamepads with vibration support
-
-### Wired Controllers 🔌
-- USB/USB-C game controllers
-- Controllers connected via OTG adapter
-- Any controller with Android vibration support
+- Internet connection for web browsing
+- WebView support (included in Android)
 
 ## Installation
 
@@ -53,83 +35,96 @@ A modern Android application for testing device vibration with adjustable intens
 3. **Build and run:**
    - Connect your Android device or start an emulator
    - Click the "Run" button in Android Studio
-   - Grant vibration and Bluetooth permissions when prompted
+   - Grant internet permission when prompted
 
 ## Usage
 
-### Basic Operation
+### Basic Browsing
 
-1. **Select Device**: Choose from the dropdown:
-   - **Phone Vibration**: Test your phone's vibration motor
-   - **Connected Controllers**: Any detected game controllers
+1. **Navigate Websites**: Enter URLs or search queries in the address bar
+   - **URL Entry**: Type full URLs (e.g., `https://example.com`)
+   - **Search**: Type search terms for automatic Google search
+   - **Smart Detection**: Automatically detects URLs vs. search queries
 
-2. **Adjust Intensity**: Use the slider to set vibration intensity (0-100%)
+2. **Tab Management**:
+   - **Add Tab**: Click the + button to create new tabs
+   - **Switch Tabs**: Click on any tab to switch between web pages
+   - **Close Tabs**: Click the X button on active tabs to close them
+   - **Visual Feedback**: Active tab highlighted with different background
 
-3. **Start Vibration**: Toggle the switch to start infinite vibration:
-   - **Continuous**: Vibration runs indefinitely until manually stopped
-   - **Live Updates**: Adjust intensity in real-time while vibrating
-   - **10-Second Cycles**: Seamless restart every 10 seconds for continuous operation
-   - **Infinite Loop**: Vibration automatically restarts to run forever
-
-4. **Status Indicator**: Shows current vibration state:
-   - **Pink**: Device is vibrating
-   - **Gray**: Device is idle
+3. **Navigation Controls**:
+   - **Back**: Navigate to previous page in history
+   - **Forward**: Navigate to next page in history
+   - **Reload**: Refresh the current page
+   - **Home**: Reset to blank page
 
 ### Advanced Features
 
-- **Device Icons**: Automatic icon display based on controller type
-- **Intensity Scaling**: All vibration levels scale with the intensity slider
-- **Live Control**: Change intensity while vibrating without interruption
-- **Infinite Operation**: No automatic shutdown - runs until manually stopped
-- **Controller Hot-Swap**: Connect/disconnect controllers without restarting app
+- **Settings**: Access theme selection and browser preferences
+- **Context Menu**: Long-press on web content for additional options
+- **Tab Persistence**: Each tab maintains its own browsing history and state
+- **URL Bar Updates**: Address bar automatically updates with current page URL
 
 ## Technical Details
 
 - **Language**: Kotlin
 - **Minimum SDK**: 31 (Android 12)
-- **Target SDK**: 34 (Android 14)
+- **Target SDK**: 33 (Android 13)
 - **Build Tool**: Gradle 8.0
-- **UI Framework**: Material Design Components
-- **Controller API**: Android InputManager and Vibration API
+- **UI Framework**: Android Views with custom layouts
+- **Web Engine**: Android WebView with JavaScript support
 
 ### Key Components
 
-- `MainActivity.kt`: Main activity handling vibration logic and device selection
-- `ControllerManager.kt`: Manages controller detection and vibration
-- `activity_main.xml`: UI layout with device selection, intensity control, and toggle
-- `AndroidManifest.xml`: App configuration and permissions
+- `MainActivity.kt`: Main browser activity with tab management and navigation
+- `SettingsActivity.kt`: Settings screen for theme and browser preferences
+- `activity_main.xml`: Main browser interface with tabs, navigation, and webview
+- `tab_item.xml`: Individual tab layout with title and close button
+- `activity_settings.xml`: Settings interface with theme selection
+- `context_menu.xml`: Context menu popup for web content
 
-### Vibration Implementation
+### Tab System Implementation
 
-The app uses Android Vibration API with infinite vibration capability and real-time intensity control:
+- **WebView Management**: Each tab contains an independent WebView instance
+- **State Tracking**: Proper tab state management with current tab tracking
+- **Visual Updates**: Real-time tab title and favicon updates
+- **Memory Management**: Efficient WebView lifecycle management
 
-- **Android 12+**: Uses `VibratorManager` for enhanced control
-- **Intensity Scaling**: Real-time amplitude adjustment (0-255 scale)
-- **Controller Vibration**: Uses device-specific vibrators via InputManager
-- **Infinite Operation**: 10-second cycles with automatic restart for continuous vibration
-- **Live Updates**: Intensity changes apply immediately while vibrating
-- **Precise Timing**: 10-second vibration cycles with seamless restart
-- **Amplitude Control**: Supports intensity control on Android 10+ (255 = 100%)
-- **Infinite Loop**: Automatic restart ensures continuous operation until manual stop
+### Theme System
 
-### Hot Pink Theme Design
+- **Desktop Matching**: Same theme options as desktop CorrodedProxyV2
+- **Persistent Storage**: Theme preferences saved in SharedPreferences
+- **Real-time Switching**: Immediate theme changes without app restart
 
-- **Background**: Deep purple-tinted (#1A0D15) for reduced eye strain
-- **Cards**: Purple-tinted (#402940) with hot pink borders and shadows
-- **Primary Color**: Hot pink (#FF1493) for interactive elements
-- **Accent Color**: Bubblegum pink (#FF69B4) for success states and switch thumb
-- **Typography**: Hierarchical text sizing with pink-tinted colors
-- **Layout**: Vertical card stack with consistent spacing
-- **Switch Track**: Slightly darker than cards (#352235) for visual contrast
+### WebView Configuration
+
+- **JavaScript Enabled**: Full JavaScript support for modern web applications
+- **DOM Storage**: Local storage and session storage support
+- **Responsive Design**: Proper viewport configuration for mobile web pages
+- **Error Handling**: Graceful error handling for network issues
+
+## UI Design
+
+### Color Scheme
+
+- **Primary Background**: #222 (Dark gray)
+- **UI Elements**: #333 (Medium gray)
+- **Active Elements**: #444 (Light gray)
+- **Text**: #fff (White)
+- **Input Fields**: #4545459e (Semi-transparent gray)
+
+### Layout Structure
+
+- **Top Navigation**: Tab bar with add tab and settings buttons
+- **Navigation Bar**: URL bar with navigation controls
+- **Content Area**: WebView container with proper margins
+- **Responsive Design**: Adapts to different screen orientations
 
 ## Permissions
 
 The app requests the following permissions:
 
-- **Vibration**: Required to control device vibration motors
-- **Bluetooth Scan**: Required to discover Bluetooth controllers (Android 12+)
-- **Bluetooth Connect**: Required to connect to Bluetooth controllers (Android 12+)
-- **Location**: Required for Bluetooth device discovery (Android 10-11, not used for location tracking)
+- **Internet**: Required for web browsing and loading web content
 
 ## CI/CD
 
@@ -139,7 +134,6 @@ This project uses GitHub Actions for automated builds:
 - **Debug APK**: Generates debug APK for testing
 - **Gradle Wrapper**: Uses Gradle 8.4 for consistent builds
 - **Java 17**: Uses latest stable Java version
-- **Updated Actions**: Uses GitHub Actions v4 for security and performance
 
 ### Build Status
 
@@ -149,36 +143,46 @@ This project uses GitHub Actions for automated builds:
 
 ### Common Issues
 
-1. **Controller Not Detected**:
-   - Ensure Bluetooth is enabled
-   - Check controller is in pairing mode
-   - Verify controller supports vibration
-   - Restart the app after connecting
+1. **Pages Not Loading**:
+   - Check internet connection
+   - Verify URL is correct
+   - Try reloading the page
 
-2. **Vibration Not Working**:
-   - Check device has vibration capability
-   - Ensure vibration permission is granted
-   - Try different intensity levels
-   - Restart the app
+2. **JavaScript Not Working**:
+   - JavaScript is enabled by default
+   - Some sites may block WebView access
+   - Check site compatibility
 
-3. **App Crashes**:
-   - Check Android version compatibility (12+ required)
-   - Ensure sufficient device storage
-   - Report issue with device details
+3. **Tab Issues**:
+   - Minimum one tab is always maintained
+   - Tab closing is disabled when only one tab exists
+   - Try restarting app if tabs become unresponsive
 
-### Device Compatibility
+4. **Settings Not Saving**:
+   - Check app storage permissions
+   - Restart app after changing settings
+   - Verify theme selection is applied
 
-- **Tested Devices**: Samsung Galaxy S21, Pixel 6, OnePlus 9
-- **Tested Controllers**: Xbox Series X, PS5 DualSense, generic Bluetooth gamepads
-- **Known Issues**: Some older controllers may not report vibration capability correctly
+### Performance Tips
+
+- **Tab Management**: Close unused tabs to improve performance
+- **Memory Usage**: Limit number of open tabs on older devices
+- **Network**: Use Wi-Fi for better browsing performance
 
 ## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test thoroughly
+4. Test thoroughly on multiple devices
 5. Submit a pull request
+
+### Development Guidelines
+
+- Follow Android Material Design principles
+- Maintain consistency with desktop CorrodedProxyV2
+- Test on various screen sizes and Android versions
+- Ensure proper memory management for WebView instances
 
 ## License
 
@@ -187,17 +191,17 @@ This project is open source. See the LICENSE file for details.
 ## Changelog
 
 ### v1.0.0
-- Initial release with VBRT branding
-- Hot pink and bubblegum pink theme implementation
-- Intensity slider control with live updates
-- Infinite vibration capability with 10-second cycles
-- Controller support with device type detection
-- Real-time intensity adjustment while vibrating
-- Android 12+ compatibility
-- Automatic vibration restart for continuous operation
+- Initial release with 1:1 desktop CorrodedProxyV2 experience
+- Complete tab management system with visual feedback
+- Full navigation controls and URL bar functionality
+- Settings system with theme selection
+- Context menu implementation
+- Dark theme matching desktop version
+- WebView integration with JavaScript support
+- Responsive design for various screen sizes
 
 ---
 
-**VBRT** - A Girl's Best Friend
+**CorrodedProxyV2 Android** - Mobile Web Browser
 
-For issues and feature requests, please open an issue on the [GitHub repository](https://github.com/yourusername/mobile-vibrator/issues).
+For issues and feature requests, please open an issue on the [GitHub repository](https://github.com/VoltacceptYT/Android-Application/issues).

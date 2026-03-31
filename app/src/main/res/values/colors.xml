@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Hot pink and bubblegum pink theme -->
-    <color name="primary">#FF1493</color>
-    <color name="primary_dark">#C71585</color>
-    <color name="accent">#FF69B4</color>
-    <color name="background_dark">#1A0D15</color>
-    <color name="surface_dark">#2D1B2E</color>
-    <color name="card_dark">#402940</color>
-    <color name="text_primary">#FFE4E1</color>
-    <color name="text_secondary">#FFB6C1</color>
-    <color name="text_muted">#FF69B4</color>
-    <color name="border_dark">#C71585</color>
-    <color name="success">#FF69B4</color>
-    <color name="error">#FF1493</color>
-    <color name="switch_track">#352235</color>
-    <color name="switch_thumb">#FF69B4</color>
-    <color name="ripple">#FF1493</color>
+    <color name="md_theme_light_primary">#006493</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#CAE6FF</color>
+    <color name="md_theme_light_onPrimaryContainer">#001E30</color>
+    <color name="md_theme_light_secondary">#50607A</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#D8E4F8</color>
+    <color name="md_theme_light_onSecondaryContainer">#0C1D35</color>
+    <color name="md_theme_light_tertiary">#65587B</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#ECDCFF</color>
+    <color name="md_theme_light_onTertiaryContainer">#201634</color>
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+    <color name="md_theme_light_background">#FDFBFF</color>
+    <color name="md_theme_light_onBackground">#1A1B1E</color>
+    <color name="md_theme_light_surface">#FDFBFF</color>
+    <color name="md_theme_light_onSurface">#1A1B1E</color>
+    <color name="md_theme_light_surfaceVariant">#DDE3EA</color>
+    <color name="md_theme_light_onSurfaceVariant">#41474D</color>
 </resources>

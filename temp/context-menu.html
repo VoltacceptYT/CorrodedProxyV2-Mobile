@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context Menu</title>
+    <link rel="stylesheet" href="/assets/css/global.css?v=6">
+    <link rel="stylesheet" href="/assets/css/context-menu.css?v=01">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="context-menu" class="context-menu hidden">
+        <div class="context-menu-item" data-action="back">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back</span>
+        </div>
+        <div class="context-menu-item" data-action="forward">
+            <i class="fas fa-arrow-right"></i>
+            <span>Forward</span>
+        </div>
+        <div class="context-menu-item" data-action="reload">
+            <i class="fas fa-rotate-right"></i>
+            <span>Reload</span>
+        </div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" data-action="inspect">
+            <i class="fas fa-magnifying-glass"></i>
+            <span>Inspect</span>
+        </div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" data-action="settings">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </div>
+    </div>
+    <script src="/assets/js/context-menu.js"></script>
+</body>
+
+</html>

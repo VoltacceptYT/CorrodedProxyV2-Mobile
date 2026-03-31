@@ -10,7 +10,7 @@
             <shape android:shape="rectangle">
                 <solid android:color="@color/earth_accent" />
                 <corners android:radius="2dp" />
-            </solid>
+            </shape>
         </clip>
     </item>
 </layer-list>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Font fallback references - add the .ttf files to res/font/ to enable custom font -->
-    <!-- inter_light.ttf, inter_regular.ttf, inter_semibold.ttf, inter_extrabold.ttf -->
-    <!-- from https://fonts.google.com/specimen/Inter -->
-</resources>

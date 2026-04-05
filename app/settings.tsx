@@ -19,8 +19,8 @@ import { useTheme } from "@/context/ThemeContext";
 import { ThemeName, themeNames } from "@/constants/colors";
 
 const THEME_DESCRIPTIONS: Record<ThemeName, string> = {
-  Earth: "Natural earth tones",
-  Virellus: "Elegant emerald green",
+  Earth: "Fresh forest green",
+  Virellus: "Rich royal purple",
   Neptune: "Deep ocean blue",
   Mars: "Warm red & orange",
   Solar: "Fiery flame tones",

@@ -2,6 +2,7 @@ import { Feather } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
+  Alert,
   FlatList,
   Keyboard,
   Platform,
@@ -14,12 +15,24 @@ import {
 import { useBrowser } from "@/context/BrowserContext";
 import { useTheme } from "@/context/ThemeContext";
 
-function resolveUrl(input: string): string {
+function resolveUrl(input: string): { url: string; valid: boolean } {
   const trimmed = input.trim();
-  if (!trimmed) return "https://start.duckduckgo.com";
-  if (/^https?:\/\//i.test(trimmed)) return trimmed;
-  if (/^[\w-]+\.\w{2,}/.test(trimmed)) return `https://${trimmed}`;
-  return `https://start.duckduckgo.com/?q=${encodeURIComponent(trimmed)}`;
+  if (!trimmed) return { url: "https://start.duckduckgo.com", valid: true };
+  // Check if it's a full URL with protocol
+  if (/^https?:\/\//i.test(trimmed)) {
+    try {
+      new URL(trimmed);
+      return { url: trimmed, valid: true };
+    } catch {
+      return { url: "", valid: false };
+    }
+  }
+  // Check if it looks like a domain (e.g. google.com, sub.domain.co.uk)
+  if (/^[\w-]+\.[\w.-]+\w{2,}(\/.*)?$/.test(trimmed)) {
+    return { url: `https://${trimmed}`, valid: true };
+  }
+  // Not a valid URL
+  return { url: "", valid: false };
 }
 
 function displayUrl(url: string): string {
@@ -76,8 +89,12 @@ export default function AddressBar() {
   );
 
   const onSubmit = useCallback(() => {
-    const url = resolveUrl(inputValue);
-    navigateActiveTab(url);
+    const result = resolveUrl(inputValue);
+    if (!result.valid) {
+      Alert.alert("Invalid URL", "Please enter a valid URL (e.g. https://example.com or example.com)");
+      return;
+    }
+    navigateActiveTab(result.url);
     setEditing(false);
     setSuggestions([]);
     Keyboard.dismiss();
@@ -154,7 +171,7 @@ export default function AddressBar() {
             returnKeyType="go"
             selectTextOnFocus
             placeholderTextColor={theme.mutedForeground}
-            placeholder="Search or enter URL"
+            placeholder="Enter URL"
           />
         </View>
 

@@ -14,7 +14,6 @@ import {
 } from "react-native";
 import AddressBar from "@/components/AddressBar";
 import DownloadsPanel from "@/components/DownloadsPanel";
-import ParticleSystem from "@/components/ParticleSystem";
 import TabBar from "@/components/TabBar";
 import { useBrowser } from "@/context/BrowserContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -114,7 +113,6 @@ export default function BrowserScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <ParticleSystem />
 
       <View
         style={[

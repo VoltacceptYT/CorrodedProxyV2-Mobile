@@ -8,7 +8,6 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  Switch,
   Text,
   TouchableOpacity,
   View,
@@ -36,7 +35,7 @@ const THEME_GRADIENT: Record<ThemeName, [string, string, string]> = {
 };
 
 export default function SettingsScreen() {
-  const { theme, themeName, setTheme, particlesEnabled, setParticlesEnabled } = useTheme();
+  const { theme, themeName, setTheme } = useTheme();
   const { clearHistory } = useBrowser();
   const insets = useSafeAreaInsets();
 
@@ -117,30 +116,6 @@ export default function SettingsScreen() {
               </TouchableOpacity>
             );
           })}
-        </View>
-
-        <Text style={[styles.sectionLabel, { color: theme.mutedForeground }]}>VISUAL EFFECTS</Text>
-        <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
-          <View style={styles.settingRow}>
-            <View style={styles.settingInfo}>
-              <Feather name="star" size={16} color={theme.primary} style={{ marginRight: 10 }} />
-              <View>
-                <Text style={[styles.settingName, { color: theme.foreground }]}>Particle System</Text>
-                <Text style={[styles.settingDesc, { color: theme.mutedForeground }]}>
-                  Animated background particles
-                </Text>
-              </View>
-            </View>
-            <Switch
-              value={particlesEnabled}
-              onValueChange={(v) => {
-                setParticlesEnabled(v);
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              }}
-              trackColor={{ false: theme.border, true: theme.primary }}
-              thumbColor={Platform.OS === "android" ? theme.primaryForeground : undefined}
-            />
-          </View>
         </View>
 
         <Text style={[styles.sectionLabel, { color: theme.mutedForeground }]}>PRIVACY</Text>

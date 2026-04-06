@@ -8,33 +8,34 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  Switch,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { useBrowser } from "@/context/BrowserContext";
 import { useTheme } from "@/context/ThemeContext";
 import { ThemeName, themeNames } from "@/constants/colors";
 
 const THEME_DESCRIPTIONS: Record<ThemeName, string> = {
-  Earth: "Natural earth tones",
-  Virellus: "Elegant emerald green",
+  Earth: "Fresh forest green",
+  Virellus: "Rich royal purple",
   Neptune: "Deep ocean blue",
   Mars: "Warm red & orange",
-  Solar: "Bright solar gold",
+  Solar: "Fiery flame tones",
 };
 
-const THEME_ACCENT: Record<ThemeName, string> = {
-  Earth: "#8b7355",
-  Virellus: "#4a9a50",
-  Neptune: "#3060c0",
-  Mars: "#c04820",
-  Solar: "#c8a000",
+// Gradient colors for theme orbs - matching each theme's palette
+const THEME_GRADIENT: Record<ThemeName, [string, string, string]> = {
+  Earth: ["#28a840", "#1e8c34", "#0f2212"],
+  Virellus: ["#a060e0", "#8040d0", "#6c30b8"],
+  Neptune: ["#4080e0", "#3060c0", "#2050a8"],
+  Mars: ["#e06040", "#c04820", "#a83818"],
+  Solar: ["#ff4500", "#ff6b35", "#ff8c00"],
 };
 
 export default function SettingsScreen() {
-  const { theme, themeName, setTheme, particlesEnabled, setParticlesEnabled } = useTheme();
+  const { theme, themeName, setTheme } = useTheme();
   const { clearHistory } = useBrowser();
   const insets = useSafeAreaInsets();
 
@@ -97,7 +98,12 @@ export default function SettingsScreen() {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                 }}
               >
-                <View style={[styles.themeOrb, { backgroundColor: THEME_ACCENT[name] }]} />
+                <LinearGradient
+                  colors={THEME_GRADIENT[name]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.themeOrb}
+                />
                 <View style={styles.themeInfo}>
                   <Text style={[styles.themeName, { color: theme.foreground }]}>{name}</Text>
                   <Text style={[styles.themeDesc, { color: theme.mutedForeground }]}>
@@ -110,30 +116,6 @@ export default function SettingsScreen() {
               </TouchableOpacity>
             );
           })}
-        </View>
-
-        <Text style={[styles.sectionLabel, { color: theme.mutedForeground }]}>VISUAL EFFECTS</Text>
-        <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
-          <View style={styles.settingRow}>
-            <View style={styles.settingInfo}>
-              <Feather name="star" size={16} color={theme.primary} style={{ marginRight: 10 }} />
-              <View>
-                <Text style={[styles.settingName, { color: theme.foreground }]}>Particle System</Text>
-                <Text style={[styles.settingDesc, { color: theme.mutedForeground }]}>
-                  Animated background particles
-                </Text>
-              </View>
-            </View>
-            <Switch
-              value={particlesEnabled}
-              onValueChange={(v) => {
-                setParticlesEnabled(v);
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              }}
-              trackColor={{ false: theme.border, true: theme.primary }}
-              thumbColor={Platform.OS === "android" ? theme.primaryForeground : undefined}
-            />
-          </View>
         </View>
 
         <Text style={[styles.sectionLabel, { color: theme.mutedForeground }]}>PRIVACY</Text>

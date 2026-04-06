@@ -50,7 +50,6 @@ export default function AddressBar() {
   const onFocus = useCallback(() => {
     setEditing(true);
     setInputValue(activeTab?.url || "");
-    setTimeout(() => inputRef.current?.selectAll?.(), 50);
   }, [activeTab?.url]);
 
   const onBlur = useCallback(() => {

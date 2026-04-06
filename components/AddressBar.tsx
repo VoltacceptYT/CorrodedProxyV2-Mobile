@@ -16,10 +16,10 @@ import { useTheme } from "@/context/ThemeContext";
 
 function resolveUrl(input: string): string {
   const trimmed = input.trim();
-  if (!trimmed) return "https://duckduckgo.com";
+  if (!trimmed) return "https://start.duckduckgo.com";
   if (/^https?:\/\//i.test(trimmed)) return trimmed;
   if (/^[\w-]+\.\w{2,}/.test(trimmed)) return `https://${trimmed}`;
-  return `https://duckduckgo.com/?q=${encodeURIComponent(trimmed)}`;
+  return `https://start.duckduckgo.com/?q=${encodeURIComponent(trimmed)}`;
 }
 
 function displayUrl(url: string): string {

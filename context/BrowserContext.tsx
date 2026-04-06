@@ -44,7 +44,7 @@ interface BrowserContextValue {
   reloadRef: React.MutableRefObject<(() => void) | null>;
 }
 
-const DEFAULT_URL = "https://duckduckgo.com";
+const DEFAULT_URL = "https://start.duckduckgo.com";
 
 function makeId() {
   return Date.now().toString() + Math.random().toString(36).substr(2, 9);
